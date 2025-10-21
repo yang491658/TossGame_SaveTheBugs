@@ -1,7 +1,6 @@
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using System.Collections;
 using System.Collections.Generic;
 
 #if UNITY_EDITOR
@@ -45,21 +44,21 @@ public class UIManager : MonoBehaviour
         if (inGameUI == null)
             inGameUI = GameObject.Find("InGameUI");
         if (scoreText == null)
-            scoreText = GameObject.Find("InGameUI/Score/ScoreText").GetComponent<TextMeshProUGUI>();
+            scoreText = GameObject.Find("InGameUI/Score/ScoreText")?.GetComponent<TextMeshProUGUI>();
 
         if (settingUI == null)
             settingUI = GameObject.Find("SettingUI");
         if (settingScoreText == null)
-            settingScoreText = GameObject.Find("SettingUI/Box/Score/ScoreText").GetComponent<TextMeshProUGUI>();
+            settingScoreText = GameObject.Find("SettingUI/Box/Score/ScoreText")?.GetComponent<TextMeshProUGUI>();
 
         if (bgmSlider == null)
-            bgmSlider = GameObject.Find("BGM/BgmSlider").GetComponent<Slider>();
+            bgmSlider = GameObject.Find("BGM/BgmSlider")?.GetComponent<Slider>();
         if (sfxSlider == null)
-            sfxSlider = GameObject.Find("SFX/SfxSlider").GetComponent<Slider>();
+            sfxSlider = GameObject.Find("SFX/SfxSlider")?.GetComponent<Slider>();
         if (bgmIcon == null)
-            bgmIcon = GameObject.Find("BGM/BgmBtn/BgmIcon").GetComponent<Image>();
+            bgmIcon = GameObject.Find("BGM/BgmBtn/BgmIcon")?.GetComponent<Image>();
         if (sfxIcon == null)
-            sfxIcon = GameObject.Find("SFX/SfxBtn/SfxIcon").GetComponent<Image>();
+            sfxIcon = GameObject.Find("SFX/SfxBtn/SfxIcon")?.GetComponent<Image>();
 
         bgmIcons.Clear();
         LoadSprite(bgmIcons, "White Music");
@@ -72,12 +71,12 @@ public class UIManager : MonoBehaviour
         if (confirmUI == null)
             confirmUI = GameObject.Find("ConfirmUI");
         if (confirmText == null)
-            confirmText = GameObject.Find("ConfirmUI/Box/ConfirmText").GetComponent<TextMeshProUGUI>();
+            confirmText = GameObject.Find("ConfirmUI/Box/ConfirmText")?.GetComponent<TextMeshProUGUI>();
 
         if (resultUI == null)
             resultUI = GameObject.Find("ResultUI");
         if (resultScoreText == null)
-            resultScoreText = GameObject.Find("ResultUI/Score/ScoreText").GetComponent<TextMeshProUGUI>();
+            resultScoreText = GameObject.Find("ResultUI/Score/ScoreText")?.GetComponent<TextMeshProUGUI>();
     }
 
     private static void LoadSprite(List<Sprite> _list, string _sprite)
@@ -226,7 +225,7 @@ public class UIManager : MonoBehaviour
         {
             if (SoundManager.Instance.IsSFXMuted())
                 sfxIcon.sprite = sfxIcons[2];
-            else if (SoundManager.Instance.GetSFXVolume() < 0.2f)
+            else if (SoundManager.Instance?.GetSFXVolume() < 0.2f)
                 sfxIcon.sprite = sfxIcons[1];
             else
                 sfxIcon.sprite = sfxIcons[0];
@@ -238,8 +237,8 @@ public class UIManager : MonoBehaviour
     public void OnClickSetting() => OpenSetting(true);
     public void OnClickClose() => OpenUI(false);
 
-    public void OnClickBGM() => SoundManager.Instance.ToggleBGM();
-    public void OnClickSFX() => SoundManager.Instance.ToggleSFX();
+    public void OnClickBGM() => SoundManager.Instance?.ToggleBGM();
+    public void OnClickSFX() => SoundManager.Instance?.ToggleSFX();
 
     public void OnClickReplay() => OpenConfirm(true, "다시", GameManager.Instance.Replay);
     public void OnClickQuit() => OpenConfirm(true, "종료", GameManager.Instance.Quit);
@@ -251,13 +250,13 @@ public class UIManager : MonoBehaviour
     public void OnClickCancel() => OpenConfirm(false);
     #endregion
 
-    private IEnumerator PlayClickThen(System.Action _action)
+    #region SET
+    public void SetInGameUI(float _margin)
     {
-        SoundManager.Instance.Button();
-        float len = SoundManager.Instance.GetSFXLength("Button");
-        if (len > 0f) yield return new WaitForSecondsRealtime(len);
-        _action?.Invoke();
+        var rt = inGameUI.GetComponent<RectTransform>();
+        rt.offsetMax = new Vector2(rt.offsetMax.x, rt.offsetMax.y - _margin);
     }
+    #endregion
 
     #region GET
     public bool GetOnSetting() => settingUI.activeSelf;

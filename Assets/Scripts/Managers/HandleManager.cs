@@ -1,7 +1,7 @@
-using UnityEngine;
-using UnityEngine.EventSystems;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class HandleManager : MonoBehaviour
 {
@@ -11,26 +11,42 @@ public class HandleManager : MonoBehaviour
     private LayerMask layer;
     private float time;
 
+    [Header("Entity")]
+    [SerializeField] private Player player;
+
     [Header("Click")]
     private const float doubleClick = 0.25f;
     private bool isDoubleClick;
 
     [Header("Drag")]
+    [SerializeField][Min(0f)] private float maxDrag = 3f;
     private const float drag = 0.15f;
     private bool isDragging;
     private Vector2 dragStart;
     private Vector2 dragCurrent;
 
+    [Header("Ring")]
+    [SerializeField] private Transform ring;
+    [SerializeField] private Transform handle;
+
 #if UNITY_EDITOR
     [Header("Mark")]
-    private readonly List<Vector2> marks = new();
-    private readonly List<float> markTimes = new();
-    private readonly List<Color> markColors = new();
     [SerializeField] private float markDuration = 1f;
     [SerializeField] private float markRadius = 0.5f;
     [SerializeField] private int markSegment = 24;
+    private readonly List<Vector2> marks = new();
+    private readonly List<float> markTimes = new();
+    private readonly List<Color> markColors = new();
 
     private readonly List<Vector2> dragPath = new();
+#endif
+
+#if UNITY_EDITOR
+    private void OnValidate()
+    {
+        if (ring == null) ring = GameObject.Find("Ring")?.transform;
+        if (handle == null) handle = GameObject.Find("Handle")?.transform;
+    }
 #endif
 
     private void Awake()
@@ -42,6 +58,8 @@ public class HandleManager : MonoBehaviour
         }
         Instance = this;
         DontDestroyOnLoad(gameObject);
+
+        SetHandle();
     }
 
     private void Update()
@@ -81,10 +99,10 @@ public class HandleManager : MonoBehaviour
             HandleEnd(t.position);
     }
 
-    private bool IsOverUI(int fingerID = -1)
-        => EventSystem.current != null && EventSystem.current.IsPointerOverGameObject(fingerID);
+    private bool IsOverUI(int _fingerID = -1)
+        => EventSystem.current != null && EventSystem.current.IsPointerOverGameObject(_fingerID);
 
-    private Vector2 ScreenToWorld(Vector2 screenPos) => cam.ScreenToWorldPoint(screenPos);
+    private Vector3 ScreenToWorld(Vector3 _screenPos) => cam.ScreenToWorldPoint(_screenPos);
 
     private bool CanSelect(RaycastHit2D _go)
     {
@@ -129,6 +147,12 @@ public class HandleManager : MonoBehaviour
 
         if (isDragging)
         {
+            if (maxDrag > 0f)
+            {
+                Vector2 delta = worldPos - dragStart;
+                worldPos = dragStart + Vector2.ClampMagnitude(delta, maxDrag);
+            }
+
             dragCurrent = worldPos;
             OnDragMove(dragStart, dragCurrent);
 #if UNITY_EDITOR
@@ -143,6 +167,12 @@ public class HandleManager : MonoBehaviour
 
         if (isDragging)
         {
+            if (maxDrag > 0f)
+            {
+                Vector2 delta = worldPos - dragStart;
+                worldPos = dragStart + Vector2.ClampMagnitude(delta, maxDrag);
+            }
+
             float distance = Vector2.Distance(dragStart, worldPos);
             if (distance >= drag)
             {
@@ -206,16 +236,32 @@ public class HandleManager : MonoBehaviour
     private void OnDragBegin(Vector2 _pos)
     {
         Debug.Log($"드래그 시작 : {_pos}"); // TODO : 드래그 시작 동작
+
+        ring.gameObject.SetActive(true);
+        ring.position = _pos;
+        ring.localScale = Vector3.zero;
+
+        handle.gameObject.SetActive(true);
+        handle.position = _pos;
     }
 
     private void OnDragMove(Vector2 _start, Vector2 _current)
     {
         Debug.Log($"드래그 진행"); // TODO : 드래그 진행 동작
+
+        float scale = 2f * Vector2.Distance(_start, _current);
+        ring.localScale = new Vector3(scale, scale, scale) + handle.localScale;
+        handle.position = _current;
+
+        player.Move(_current - _start);
     }
 
     private void OnDragEnd(Vector2 _start, Vector2 _end)
     {
         Debug.Log($"드래그 종료 : {_start} → {_end}"); // TODO : 드래그 종료 동작
+
+        ring.gameObject.SetActive(false);
+        handle.gameObject.SetActive(false);
     }
 
 #if UNITY_EDITOR
@@ -275,5 +321,16 @@ public class HandleManager : MonoBehaviour
         }
     }
 #endif
+    #endregion
+    
+    #region SET
+    public void SetHandle()
+    {
+        if (player == null)
+            player = EntityManager.Instance.GetPlayer();
+
+        ring.gameObject.SetActive(false);
+        handle.gameObject.SetActive(false);
+    }
     #endregion
 }
