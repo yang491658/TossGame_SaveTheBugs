@@ -25,9 +25,10 @@ public class HandleManager : MonoBehaviour
     private Vector2 dragStart;
     private Vector2 dragCurrent;
 
-    [Header("Ring")]
+    [Header("Aim")]
     [SerializeField] private Transform ring;
-    [SerializeField] private Transform circle;
+    [SerializeField] private Transform handle;
+    [SerializeField] private bool aimVisible = false;
 
 #if UNITY_EDITOR
     [Header("Mark")]
@@ -44,8 +45,8 @@ public class HandleManager : MonoBehaviour
 #if UNITY_EDITOR
     private void OnValidate()
     {
-        if (ring == null) ring = GameObject.Find("Ring")?.transform;
-        if (circle == null) circle = GameObject.Find("Circle")?.transform;
+        if (ring == null) ring = GameObject.Find("AimRing")?.transform;
+        if (handle == null) handle = GameObject.Find("AimCircle")?.transform;
     }
 #endif
 
@@ -104,15 +105,7 @@ public class HandleManager : MonoBehaviour
 
     private Vector3 ScreenToWorld(Vector3 _screenPos) => cam.ScreenToWorldPoint(_screenPos);
 
-    private bool CanSelect(Collider2D _col)
-    {
-        if (layer == 0) return true;
-
-        bool con1 = _go.collider != null;
-        bool con2 = true; // TODO : 추가 조건
-
-        return con1 && con2;
-    }
+    private bool CanSelect(Collider2D _col) => layer == 0 || _col != null;
 
     #region 구분
     private void HandleBegin(Vector2 _pos, int _fingerID = -1)
@@ -237,21 +230,27 @@ public class HandleManager : MonoBehaviour
     {
         Debug.Log($"드래그 시작 : {_pos}"); // TODO : 드래그 시작 동작
 
-        ring.gameObject.SetActive(true);
-        ring.position = _pos;
-        ring.localScale = Vector3.zero;
+        if (aimVisible)
+        {
+            ring.gameObject.SetActive(true);
+            ring.position = _pos;
+            ring.localScale = Vector3.zero;
 
-        circle.gameObject.SetActive(true);
-        circle.position = _pos;
+            handle.gameObject.SetActive(true);
+            handle.position = _pos;
+        }
     }
 
     private void OnDragMove(Vector2 _start, Vector2 _current)
     {
         Debug.Log($"드래그 진행"); // TODO : 드래그 진행 동작
 
-        float scale = 2f * Vector2.Distance(_start, _current);
-        ring.localScale = new Vector3(scale, scale, scale) + circle.localScale;
-        circle.position = _current;
+        if (aimVisible)
+        {
+            float scale = 2f * Vector2.Distance(_start, _current);
+            ring.localScale = new Vector3(scale, scale, scale) + handle.localScale;
+            handle.position = _current;
+        }
 
         player.Move(_current - _start);
     }
@@ -260,8 +259,11 @@ public class HandleManager : MonoBehaviour
     {
         Debug.Log($"드래그 종료 : {_start} → {_end}"); // TODO : 드래그 종료 동작
 
-        ring.gameObject.SetActive(false);
-        circle.gameObject.SetActive(false);
+        if (aimVisible)
+        {
+            ring.gameObject.SetActive(false);
+            handle.gameObject.SetActive(false);
+        }
     }
 
 #if UNITY_EDITOR
@@ -322,7 +324,7 @@ public class HandleManager : MonoBehaviour
     }
 #endif
     #endregion
-    
+
     #region SET
     public void SetHandle()
     {
@@ -330,7 +332,7 @@ public class HandleManager : MonoBehaviour
             player = EntityManager.Instance.GetPlayer();
 
         ring.gameObject.SetActive(false);
-        circle.gameObject.SetActive(false);
+        handle.gameObject.SetActive(false);
     }
     #endregion
 }

@@ -6,6 +6,8 @@ public class AutoBackground : MonoBehaviour
     private Camera cam;
     private SpriteRenderer sr;
 
+    [SerializeField] private float speed = 0.4f;
+
     private int lastW, lastH;
     private float lastAspect, lastOrthoSize;
 
@@ -20,6 +22,7 @@ public class AutoBackground : MonoBehaviour
     {
         cam = Camera.main;
         sr = GetComponent<SpriteRenderer>();
+
         Fit();
     }
 
