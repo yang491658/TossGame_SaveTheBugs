@@ -1297,8 +1297,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 0}
   maxDrag: 3
-  ring: {fileID: 0}
-  handle: {fileID: 0}
+  ring: {fileID: 1019678744}
+  circle: {fileID: 1070203467}
   markDuration: 1
   markRadius: 0.5
   markSegment: 24
@@ -1484,20 +1484,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c4f4d91872bc35d4eac4704e3f89e2cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inGameUI: {fileID: 0}
-  scoreText: {fileID: 0}
-  settingUI: {fileID: 0}
-  settingScoreText: {fileID: 0}
-  bgmSlider: {fileID: 0}
-  sfxSlider: {fileID: 0}
-  bgmIcon: {fileID: 0}
-  sfxIcon: {fileID: 0}
-  bgmIcons: []
-  sfxIcons: []
-  confirmUI: {fileID: 0}
-  confirmText: {fileID: 0}
-  resultUI: {fileID: 0}
-  resultScoreText: {fileID: 0}
+  inGameUI: {fileID: 463422171}
+  scoreText: {fileID: 1222573071}
+  settingUI: {fileID: 565046922}
+  settingScoreText: {fileID: 79075885}
+  bgmSlider: {fileID: 1367106577}
+  sfxSlider: {fileID: 892183346}
+  bgmIcon: {fileID: 185723935}
+  sfxIcon: {fileID: 1928568704}
+  bgmIcons:
+  - {fileID: 21300000, guid: 06a16cb520d0f2449a999572cae2cf97, type: 3}
+  - {fileID: 21300000, guid: cabad5b87dec1fd4e8749fa9f8936e63, type: 3}
+  sfxIcons:
+  - {fileID: 21300000, guid: fd30afab859581246b9ba7593ee3c10c, type: 3}
+  - {fileID: 21300000, guid: 2896697aee29fec4eae8809b364feeb0, type: 3}
+  - {fileID: 21300000, guid: d7f4f52e0d03f214b8b9ff47d92ab909, type: 3}
+  confirmUI: {fileID: 1922433877}
+  confirmText: {fileID: 137781734}
+  resultUI: {fileID: 578179199}
+  resultScoreText: {fileID: 180508595}
 --- !u!4 &264004223
 Transform:
   m_ObjectHideFlags: 0
@@ -3155,7 +3160,7 @@ GameObject:
   - component: {fileID: 1070203467}
   - component: {fileID: 1070203468}
   m_Layer: 0
-  m_Name: Handle
+  m_Name: Circle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5240,7 +5245,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1638876044
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5303,8 +5308,12 @@ MonoBehaviour:
   bgmVol: 1
   sfxVol: 1
   soundClips:
-    bgmClips: []
-    sfxClips: []
+    bgmClips:
+    - {fileID: 8300000, guid: d76ecd11a0b575847ba2a1c53dea9f05, type: 3}
+    - {fileID: 8300000, guid: 49731314153f00046b85f50fdc038198, type: 3}
+    sfxClips:
+    - {fileID: 8300000, guid: 2bd74fec26584e646adfcee5d63449bd, type: 3}
+    - {fileID: 8300000, guid: ceebd236cb9506b488ca55c45d0c9580, type: 3}
 --- !u!4 &1640530186
 Transform:
   m_ObjectHideFlags: 0
@@ -6670,9 +6679,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8757234db11563c478a55d79795ecf2f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyBase: {fileID: 0}
-  datas: []
-  spawnPos: {fileID: 0}
+  enemyBase: {fileID: 350016272964680081, guid: a6fe9cbba711a194a954b4585f725966, type: 3}
+  datas:
+  - {fileID: 11400000, guid: 6326ab9c65ce2b84eae2f7d72ba0061e, type: 2}
+  - {fileID: 11400000, guid: 47e0e2d261723794e9e696774e6e4c88, type: 2}
+  - {fileID: 11400000, guid: c73313753a8ca044ab6ffbea05504a19, type: 2}
+  - {fileID: 11400000, guid: 69f862a999172ff4abe0d1cff9278a22, type: 2}
+  - {fileID: 11400000, guid: d7ee59f7700574a42b4a4f6f5a71a126, type: 2}
+  - {fileID: 11400000, guid: 34b07c198eb06264d93af049fc9efca5, type: 2}
+  - {fileID: 11400000, guid: 9cdd13831a396bc4ea6a9868dac03c73, type: 2}
+  - {fileID: 11400000, guid: 3fe3e24368b10be47947cc708bfcbd5d, type: 2}
+  - {fileID: 11400000, guid: 0176d23b9874b2b4aa62db89a942aa05, type: 2}
+  - {fileID: 11400000, guid: 927fe8fbe7bf2aa429d32bc43a3a24a8, type: 2}
+  spawnPos: {fileID: 393675692}
   spawnPosY: 8
   spawnDelay: 3
   inGame: {fileID: 0}

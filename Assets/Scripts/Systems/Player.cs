@@ -9,7 +9,7 @@ public class Player : Entity
 #if UNITY_EDITOR
     private void OnValidate()
     {
-        data = AssetDatabase.LoadAssetAtPath<PlayerData>("Assets/Scripts//ScriptableObjects/Player.asset");
+        data = AssetDatabase.LoadAssetAtPath<PlayerData>("Assets/Scripts/ScriptableObjects/Player.asset");
     }
 #endif
 
