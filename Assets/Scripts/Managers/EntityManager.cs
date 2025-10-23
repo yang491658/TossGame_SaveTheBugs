@@ -97,7 +97,7 @@ public class EntityManager : MonoBehaviour
 
     public Item SpawnItem(int _id = 0, Vector2? _pos = null)
     {
-        if (items.Count > 5) return null;
+        if (items.Count >= 5) return null;
 
         ItemData data = (_id == 0)
             ? itemDatas[Random.Range(0, itemDatas.Length)]
