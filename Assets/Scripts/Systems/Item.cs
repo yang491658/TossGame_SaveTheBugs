@@ -2,28 +2,22 @@ using UnityEngine;
 
 public class Item : Entity
 {
-    private float speed = 3f;
+    private float speed = 3.5f;
     private int bounce = 0;
 
     protected override void Start()
     {
         base.Start();
-
-        float sx = Random.value < 0.5f ? -1f : 1f;
-        Vector2 dir = new Vector2(sx, -1f).normalized;
+        
+        float angle = Random.Range(180f, 360f);
+        float rad = angle * Mathf.Deg2Rad;
+        Vector2 dir = new Vector2(Mathf.Cos(rad), Mathf.Sin(rad)).normalized;
         Move(dir * speed);
-    }
-
-    protected override void Update()
-    {
-        base.Update();
-
-        Debug.Log(gameObject.name + " : "+ rb.linearVelocity + " / " + bounce);
     }
 
     private void OnTriggerEnter2D(Collider2D _collision)
     {
-        if (_collision.CompareTag("Background") && bounce < 3)
+        if (_collision.CompareTag("Background") && bounce < 5)
         {
             Bounds b = _collision.bounds;
             Vector2 p = transform.position;
@@ -51,6 +45,8 @@ public class Item : Entity
 
     public virtual void UseItem()
     {
+        Debug.Log(gameObject.name + " ¹ßµ¿");
+
         EntityManager.Instance?.Remove(this);
     }
 }

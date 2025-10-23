@@ -86,6 +86,8 @@ public class AutoBackground : MonoBehaviour
 
     private void Scroll()
     {
+        speed = Mathf.Min(3f, speed + Time.deltaTime / 200f);
+
         if (clone == null)
         {
             clone = Instantiate(img.gameObject, transform).transform;
@@ -101,6 +103,5 @@ public class AutoBackground : MonoBehaviour
             img.position = clone.position + Vector3.up * scroll;
         if (clone.position.y < lower)
             clone.position = img.position + Vector3.up * scroll;
-
     }
 }

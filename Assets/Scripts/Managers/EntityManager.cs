@@ -22,13 +22,16 @@ public class EntityManager : MonoBehaviour
     [SerializeField] private float spawnPosY = 12f;
     private Coroutine spawnRoutine;
 
+    [SerializeField][Min(1)] private int eCount = 1;
     [SerializeField][Min(0.05f)] private float eDelay = 5f;
-    [SerializeField][Min(0.05f)] private float iDelay = 10f;
+    [SerializeField][Min(3f)] private float iDelay = 10f;
 
     [Header("Entities")]
     [SerializeField] private Transform inGame;
     [SerializeField] private Transform player;
+    [SerializeField] private Transform enemyTrans;
     [SerializeField] private List<Enemy> enemies = new List<Enemy>();
+    [SerializeField] private Transform itemTrans;
     [SerializeField] private List<Item> items = new List<Item>();
 
 #if UNITY_EDITOR
@@ -80,7 +83,7 @@ public class EntityManager : MonoBehaviour
     {
         Vector2 pos = SpawnPos(_pos);
 
-        Enemy e = Instantiate(enemyBase, pos, Quaternion.identity, inGame)
+        Enemy e = Instantiate(enemyBase, pos, Quaternion.identity, enemyTrans)
             .GetComponent<Enemy>();
 
         enemies.Add(e);
@@ -94,7 +97,7 @@ public class EntityManager : MonoBehaviour
 
     public Item SpawnItem(int _id = 0, Vector2? _pos = null)
     {
-        if (items.Count >= 3) return null;
+        if (items.Count > 5) return null;
 
         ItemData data = (_id == 0)
             ? itemDatas[Random.Range(0, itemDatas.Length)]
@@ -103,7 +106,7 @@ public class EntityManager : MonoBehaviour
 
         Vector2 pos = SpawnPos(_pos) + Vector2.down;
 
-        Item i = Instantiate(itemBase, pos, Quaternion.identity, inGame)
+        Item i = Instantiate(itemBase, pos, Quaternion.identity, itemTrans)
             .GetComponent<Item>();
 
         i.SetData(data.Clone());
@@ -145,16 +148,24 @@ public class EntityManager : MonoBehaviour
 
         while (true)
         {
+            eCount = Mathf.Max(1, GameManager.Instance.GetTotalScore() / 100);
+
             float dt = Time.deltaTime;
             eTimer += dt;
             iTimer += dt;
 
-            eDelay = Mathf.Max(0.05f, eDelay - dt / 100f);
+            eDelay = Mathf.Max(0.1f, eDelay - dt / 100f);
+            iDelay = Mathf.Max(3f, iDelay - dt / 70f);
 
             int cnt = 0;
             while (eTimer >= eDelay && cnt++ < 4)
             {
-                SpawnEnemy();
+                for (int i = 0; i < eCount; i++)
+                {
+                    SpawnEnemy();
+                    yield return new WaitForSeconds(0.01f);
+                }
+
                 eTimer -= eDelay;
             }
 
@@ -164,6 +175,7 @@ public class EntityManager : MonoBehaviour
                 SpawnItem();
                 iTimer -= iDelay;
             }
+
 
             yield return null;
         }
@@ -204,6 +216,8 @@ public class EntityManager : MonoBehaviour
     {
         if (inGame == null) inGame = GameObject.Find("InGame")?.transform;
         if (player == null) player = GameObject.Find("InGame/Player")?.transform;
+        if (enemyTrans == null) enemyTrans = GameObject.Find("InGame/Enemies")?.transform;
+        if (itemTrans == null) itemTrans = GameObject.Find("InGame/Items")?.transform;
 
         float d = AutoCamera.SizeDelta;
 
