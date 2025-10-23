@@ -4,8 +4,8 @@ using UnityEngine;
 public class AutoCamera : MonoBehaviour
 {
     [SerializeField] private Vector2 res = new Vector2(1080, 1920);
-    [SerializeField] private float baseSize = 8f;
-    [SerializeField] private float minSize = 8f;
+    [SerializeField] private float baseSize = 12f;
+    [SerializeField] private float minSize = 12f;
 
     public static float SizeDelta { get; private set; } = 0f;
 

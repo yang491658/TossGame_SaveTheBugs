@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7721bb0a88c48124399b0f24e7c17977, type: 3}
-  m_Name: Player
+  m_Name: Enemy
   m_EditorClassIdentifier: 
   ID: 0
-  Name: Player
-  Image: {fileID: 21300000, guid: 56093ce9f08a60541981c85f28640da0, type: 3}
+  Name: Enemy
+  Image: {fileID: 21300000, guid: 76e17cdac50c909488d3a30b3c749b76, type: 3}

@@ -1,8 +1,19 @@
 using UnityEngine;
 
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
+
 public class Enemy : Entity
 {
-    private float speed = 3f;
+   private float speed = 1f;
+
+#if UNITY_EDITOR
+    private void OnValidate()
+    {
+        data = AssetDatabase.LoadAssetAtPath<EntityData>("Assets/Scripts/ScriptableObjects/Enemy.asset");
+    }
+#endif
 
     protected override void Start()
     {
@@ -16,6 +27,6 @@ public class Enemy : Entity
 
     private void OnBecameInvisible()
     {
-        EntityManager.Instance?.Despawn(this);
+        EntityManager.Instance?.Remove(this);
     }
 }

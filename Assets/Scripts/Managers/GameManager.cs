@@ -7,6 +7,7 @@ public class GameManager : MonoBehaviour
 
     [Header("Score")]
     [SerializeField] private int totalScore = 0;
+    private float scoreAdd = 0f;
     public event System.Action<int> OnChangeScore;
 
     public bool IsPaused { get; private set; } = false;
@@ -21,6 +22,20 @@ public class GameManager : MonoBehaviour
         }
         Instance = this;
         DontDestroyOnLoad(gameObject);
+    }
+
+    private void Update()
+    {
+        if (IsPaused || IsGameOver) return;
+
+        scoreAdd += Time.deltaTime;
+
+        if (scoreAdd >= 1f)
+        {
+            int add = Mathf.FloorToInt(scoreAdd);
+            scoreAdd -= add;
+            AddScore(add);
+        }
     }
 
     private void OnEnable()

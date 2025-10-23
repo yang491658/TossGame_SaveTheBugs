@@ -9,9 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7721bb0a88c48124399b0f24e7c17977, type: 3}
-  m_Name: Player
+  m_Script: {fileID: 11500000, guid: 4a41f9786e10cc74c89c54711f4abb29, type: 3}
+  m_Name: Item04_Item 4
   m_EditorClassIdentifier: 
-  ID: 0
-  Name: Player
-  Image: {fileID: 21300000, guid: 56093ce9f08a60541981c85f28640da0, type: 3}
+  ID: 4
+  Name: Item 4
+  Image: {fileID: 21300000, guid: 4163d63f3c40d48439bbe380444850cf, type: 3}

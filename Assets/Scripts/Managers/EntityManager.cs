@@ -13,39 +13,44 @@ public class EntityManager : MonoBehaviour
 
     [Header("Data Setting")]
     [SerializeField] private GameObject enemyBase;
-    [SerializeField] private EnemyData[] datas;
-    private readonly Dictionary<int, EnemyData> dataDic = new Dictionary<int, EnemyData>();
+    [SerializeField] private GameObject itemBase;
+    [SerializeField] private ItemData[] itemDatas;
+    private readonly Dictionary<int, ItemData> itemDic = new Dictionary<int, ItemData>();
 
     [Header("Spawn Settings")]
     [SerializeField] private Transform spawnPos;
-    [SerializeField] private float spawnPosY = 8f;
-    [SerializeField][Min(0f)] private float spawnDelay = 3f;
+    [SerializeField] private float spawnPosY = 12f;
     private Coroutine spawnRoutine;
+
+    [SerializeField][Min(0.05f)] private float eDelay = 5f;
+    [SerializeField][Min(0.05f)] private float iDelay = 10f;
 
     [Header("Entities")]
     [SerializeField] private Transform inGame;
     [SerializeField] private Transform player;
-    [SerializeField] private Transform enemies;
-    [SerializeField] private List<Enemy> spawned = new List<Enemy>();
+    [SerializeField] private List<Enemy> enemies = new List<Enemy>();
+    [SerializeField] private List<Item> items = new List<Item>();
 
 #if UNITY_EDITOR
     private void OnValidate()
     {
         if (enemyBase == null)
             enemyBase = AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Prefabs/EnemyBase.prefab");
+        if (itemBase == null)
+            itemBase = AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Prefabs/ItemBase.prefab");
 
-        if (spawnPos == null)
-            spawnPos = transform.Find("SpawnPos");
-
-        string[] guids = AssetDatabase.FindAssets("t:EnemyData", new[] { "Assets/Scripts/ScriptableObjects" });
-        var list = new List<EnemyData>(guids.Length);
+        string[] guids = AssetDatabase.FindAssets("t:ItemData", new[] { "Assets/Scripts/ScriptableObjects" });
+        var list = new List<ItemData>(guids.Length);
         for (int i = 0; i < guids.Length; i++)
         {
             string path = AssetDatabase.GUIDToAssetPath(guids[i]);
-            var data = AssetDatabase.LoadAssetAtPath<EnemyData>(path);
+            var data = AssetDatabase.LoadAssetAtPath<ItemData>(path);
             if (data != null) list.Add(data);
         }
-        datas = list.OrderBy(d => d.ID).ThenBy(d => d.Name).ToArray();
+        itemDatas = list.OrderBy(d => d.ID).ThenBy(d => d.Name).ToArray();
+
+        if (spawnPos == null)
+            spawnPos = transform.Find("SpawnPos");
     }
 #endif
 
@@ -59,51 +64,67 @@ public class EntityManager : MonoBehaviour
         Instance = this;
         DontDestroyOnLoad(gameObject);
 
-        dataDic.Clear();
-        for (int i = 0; i < datas.Length; i++)
+        itemDic.Clear();
+        for (int i = 0; i < itemDatas.Length; i++)
         {
-            var d = datas[i];
-            if (d != null && !dataDic.ContainsKey(d.ID))
-                dataDic.Add(d.ID, d);
+            var d = itemDatas[i];
+            if (d != null && !itemDic.ContainsKey(d.ID))
+                itemDic.Add(d.ID, d);
         }
-
 
         SetEntity();
     }
 
-    #region 소환
-    private EnemyData FindByID(int _id) => dataDic.TryGetValue(_id, out var _data) ? _data : null;
-
-    public Enemy Spawn(int _id = 0, Vector2? _pos = null)
+    #region 적
+    public Enemy SpawnEnemy(Vector2? _pos = null)
     {
-        EnemyData data = FindByID((_id == 0) ? Random.Range(0, datas.Length) : _id);
-        if (data == null) return null;
+        Vector2 pos = SpawnPos(_pos);
 
-        Vector2 pos;
-        if (_pos.HasValue)
-        {
-            pos = _pos.Value;
-        }
-        else
-        {
-            var cam = Camera.main;
-
-            float halfWidth = cam.orthographicSize * cam.aspect;
-            float minX = cam.transform.position.x - halfWidth;
-            float maxX = cam.transform.position.x + halfWidth;
-
-            float x = Random.Range(minX, maxX);
-            pos = new Vector2(x, spawnPos.position.y);
-        }
-
-        Enemy e = Instantiate(enemyBase, pos, Quaternion.identity, enemies)
+        Enemy e = Instantiate(enemyBase, pos, Quaternion.identity, inGame)
             .GetComponent<Enemy>();
 
-
-        e.SetData(data.Clone());
-        spawned.Add(e);
+        enemies.Add(e);
 
         return e;
+    }
+    #endregion
+
+    #region 아이템
+    private ItemData SearchItem(int _id) => itemDic.TryGetValue(_id, out var _data) ? _data : null;
+
+    public Item SpawnItem(int _id = 0, Vector2? _pos = null)
+    {
+        if (items.Count >= 3) return null;
+
+        ItemData data = (_id == 0)
+            ? itemDatas[Random.Range(0, itemDatas.Length)]
+            : SearchItem(_id);
+        if (data == null) return null;
+
+        Vector2 pos = SpawnPos(_pos) + Vector2.down;
+
+        Item i = Instantiate(itemBase, pos, Quaternion.identity, inGame)
+            .GetComponent<Item>();
+
+        i.SetData(data.Clone());
+        items.Add(i);
+
+        return i;
+    }
+    #endregion
+
+    #region 공통
+    private Vector2 SpawnPos(Vector2? _pos)
+    {
+        if (_pos.HasValue)
+            return _pos.Value;
+
+        var cam = Camera.main;
+        float halfWidth = cam.orthographicSize * cam.aspect;
+        float minX = cam.transform.position.x - halfWidth;
+        float maxX = cam.transform.position.x + halfWidth;
+        float x = Random.Range(minX, maxX);
+        return new Vector2(x, spawnPos.position.y);
     }
 
     public void ToggleSpawn(bool _on)
@@ -119,32 +140,63 @@ public class EntityManager : MonoBehaviour
 
     private IEnumerator SpawnCoroutine()
     {
+        float eTimer = eDelay;
+        float iTimer = iDelay;
+
         while (true)
         {
-            Spawn();
-            yield return new WaitForSeconds(spawnDelay);
+            float dt = Time.deltaTime;
+            eTimer += dt;
+            iTimer += dt;
+
+            eDelay = Mathf.Max(0.05f, eDelay - dt / 100f);
+
+            int cnt = 0;
+            while (eTimer >= eDelay && cnt++ < 4)
+            {
+                SpawnEnemy();
+                eTimer -= eDelay;
+            }
+
+            cnt = 0;
+            while (iTimer >= iDelay && cnt++ < 4)
+            {
+                SpawnItem();
+                iTimer -= iDelay;
+            }
+
+            yield return null;
         }
     }
     #endregion
 
     #region 제거
-    public void Despawn(Enemy _unit)
+    public void Remove(Enemy _enemy)
     {
-        if (_unit == null) return;
+        if (_enemy == null) return;
 
-        spawned.Remove(_unit);
+        enemies.Remove(_enemy);
 
-        Destroy(_unit.gameObject);
+        Destroy(_enemy.gameObject);
     }
 
-    public void DespawnAll()
+    public void Remove(Item _item)
     {
-        for (int i = spawned.Count - 1; i >= 0; i--)
-            Despawn(spawned[i]);
-    }
-    #endregion
+        if (_item == null) return;
 
-    #region 동작
+        items.Remove(_item);
+
+        Destroy(_item.gameObject);
+    }
+
+    public void RemoveAll()
+    {
+        for (int i = enemies.Count - 1; i >= 0; i--)
+            Remove(enemies[i]);
+
+        for (int i = items.Count - 1; i >= 0; i--)
+            Remove(items[i]);
+    }
     #endregion
 
     #region SET
@@ -152,7 +204,6 @@ public class EntityManager : MonoBehaviour
     {
         if (inGame == null) inGame = GameObject.Find("InGame")?.transform;
         if (player == null) player = GameObject.Find("InGame/Player")?.transform;
-        if (enemies == null) enemies = GameObject.Find("InGame/Enemies")?.transform;
 
         float d = AutoCamera.SizeDelta;
 

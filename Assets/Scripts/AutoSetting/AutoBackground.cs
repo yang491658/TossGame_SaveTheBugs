@@ -6,22 +6,27 @@ public class AutoBackground : MonoBehaviour
     private Camera cam;
     private SpriteRenderer sr;
 
-    [SerializeField] private float speed = 0.4f;
-
     private int lastW, lastH;
     private float lastAspect, lastOrthoSize;
+
+    [Header("Scroll")]
+    [SerializeField] private float speed = 0.5f;
+    private Transform img, clone;
+    private float scroll;
 
 #if UNITY_EDITOR
     private void OnValidate()
     {
         if (enabled) Fit();
+
+        if (img == null) img = GameObject.Find("Image")?.transform;
     }
 #endif
 
     private void Awake()
     {
         cam = Camera.main;
-        sr = GetComponent<SpriteRenderer>();
+        sr = img.GetComponent<SpriteRenderer>();
 
         Fit();
     }
@@ -33,9 +38,10 @@ public class AutoBackground : MonoBehaviour
         if (Screen.width != lastW || Screen.height != lastH ||
             !Mathf.Approximately(cam.aspect, lastAspect) ||
             !Mathf.Approximately(cam.orthographicSize, lastOrthoSize))
-        {
             Fit();
-        }
+
+        if (Application.isPlaying)
+            Scroll();
     }
 
     private void OnEnable()
@@ -76,5 +82,25 @@ public class AutoBackground : MonoBehaviour
         Vector3 camCenter = cam.transform.position;
         Vector3 delta = new Vector3(camCenter.x - b.center.x, camCenter.y - b.center.y, 0f);
         transform.position += delta;
+    }
+
+    private void Scroll()
+    {
+        if (clone == null)
+        {
+            clone = Instantiate(img.gameObject, transform).transform;
+            scroll = sr.bounds.size.y;
+            clone.position = img.position + Vector3.up * scroll;
+        }
+
+        img.Translate(Vector2.down * speed * Time.deltaTime, Space.World);
+        clone.Translate(Vector2.down * speed * Time.deltaTime, Space.World);
+
+        float lower = cam.transform.position.y - scroll;
+        if (img.position.y < lower)
+            img.position = clone.position + Vector3.up * scroll;
+        if (clone.position.y < lower)
+            clone.position = img.position + Vector3.up * scroll;
+
     }
 }

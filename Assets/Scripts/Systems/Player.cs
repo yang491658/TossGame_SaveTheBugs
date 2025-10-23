@@ -9,7 +9,7 @@ public class Player : Entity
 #if UNITY_EDITOR
     private void OnValidate()
     {
-        data = AssetDatabase.LoadAssetAtPath<PlayerData>("Assets/Scripts/ScriptableObjects/Player.asset");
+        data = AssetDatabase.LoadAssetAtPath<EntityData>("Assets/Scripts/ScriptableObjects/Player.asset");
     }
 #endif
 
@@ -25,8 +25,9 @@ public class Player : Entity
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Enemy"))
-        {
             GameManager.Instance?.GameOver();
-        }
+
+        if (collision.CompareTag("Item"))
+            collision.GetComponent<Item>().UseItem();
     }
 }
