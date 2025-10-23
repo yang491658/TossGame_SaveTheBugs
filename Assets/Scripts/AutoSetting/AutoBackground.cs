@@ -28,6 +28,8 @@ public class AutoBackground : MonoBehaviour
 
     private void Update()
     {
+        if (cam == null) cam = Camera.main;
+
         if (Screen.width != lastW || Screen.height != lastH ||
             !Mathf.Approximately(cam.aspect, lastAspect) ||
             !Mathf.Approximately(cam.orthographicSize, lastOrthoSize))

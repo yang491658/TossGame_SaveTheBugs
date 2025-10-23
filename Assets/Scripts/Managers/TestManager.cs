@@ -13,7 +13,10 @@ public class TestManager : MonoBehaviour
 	[SerializeField][Min(1f)] private float regameTime = 5f;
 	private Coroutine playRoutine;
 
-	private void Awake()
+    [Header("Sound Test")]
+    [SerializeField] private bool bgmPause = false;
+
+    private void Awake()
 	{
 		if (Instance != null && Instance != this)
 		{
@@ -46,17 +49,22 @@ public class TestManager : MonoBehaviour
 
 		if (isAutoReplay && GameManager.Instance.IsGameOver && playRoutine == null)
 			playRoutine = StartCoroutine(AutoReplay());
-		#endregion
+        #endregion
 
-		#region 사운드 테스트
-		if (Input.GetKeyDown(KeyCode.M))
-			SoundManager.Instance?.ToggleBGM();
-		if (Input.GetKeyDown(KeyCode.N))
-			SoundManager.Instance?.ToggleSFX();
-		#endregion
+        #region 사운드 테스트
+        if (Input.GetKeyDown(KeyCode.B))
+        {
+            bgmPause = !bgmPause;
+            SoundManager.Instance.Pause(bgmPause);
+        }
+        if (Input.GetKeyDown(KeyCode.M))
+            SoundManager.Instance.ToggleBGM();
+        if (Input.GetKeyDown(KeyCode.N))
+            SoundManager.Instance.ToggleSFX();
+        #endregion
 
-		#region 엔티티 테스트
-		for (int i = 1; i <= 10; i++)
+        #region 엔티티 테스트
+        for (int i = 1; i <= 10; i++)
 		{
 			KeyCode key = (i == 10) ? KeyCode.Alpha0 : (KeyCode)((int)KeyCode.Alpha0 + i);
 			if (Input.GetKeyDown(key))

@@ -108,15 +108,13 @@ public class EntityManager : MonoBehaviour
 
     public void ToggleSpawn(bool _on)
     {
-        if (_on)
-        {
-            spawnRoutine = StartCoroutine(SpawnCoroutine());
-        }
-        else 
-        {
+        if (spawnRoutine != null)
             StopCoroutine(spawnRoutine);
+
+        if (_on)
+            spawnRoutine = StartCoroutine(SpawnCoroutine());
+        else
             spawnRoutine = null;
-        }
     }
 
     private IEnumerator SpawnCoroutine()
@@ -124,7 +122,6 @@ public class EntityManager : MonoBehaviour
         while (true)
         {
             Spawn();
-
             yield return new WaitForSeconds(spawnDelay);
         }
     }
