@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -107,7 +107,7 @@ public class HandleManager : MonoBehaviour
 
     private bool CanSelect(Collider2D _col) => layer == 0 || _col != null;
 
-    #region ±¸ºÐ
+    #region êµ¬ë¶„
     private void HandleBegin(Vector2 _pos, int _fingerID = -1)
     {
         if (IsOverUI(_fingerID)) return;
@@ -140,13 +140,7 @@ public class HandleManager : MonoBehaviour
 
         if (isDragging)
         {
-            if (maxDrag > 0f)
-            {
-                Vector2 delta = worldPos - dragStart;
-                worldPos = dragStart + Vector2.ClampMagnitude(delta, maxDrag);
-            }
-
-            dragCurrent = worldPos;
+            dragCurrent = ClampDrag(dragStart, worldPos);
             OnDragMove(dragStart, dragCurrent);
 #if UNITY_EDITOR
             dragPath.Add(dragCurrent);
@@ -160,12 +154,7 @@ public class HandleManager : MonoBehaviour
 
         if (isDragging)
         {
-            if (maxDrag > 0f)
-            {
-                Vector2 delta = worldPos - dragStart;
-                worldPos = dragStart + Vector2.ClampMagnitude(delta, maxDrag);
-            }
-
+            worldPos = ClampDrag(dragStart, worldPos);
             float distance = Vector2.Distance(dragStart, worldPos);
             if (distance >= drag)
             {
@@ -198,6 +187,13 @@ public class HandleManager : MonoBehaviour
 #endif
     }
 
+    private Vector2 ClampDrag(Vector2 _start, Vector2 _current)
+    {
+        if (maxDrag <= 0f) return _current;
+        Vector2 delta = _current - _start;
+        return _start + Vector2.ClampMagnitude(delta, maxDrag);
+    }
+
     private IEnumerator SingleCoroutine(Vector2 _pos)
     {
         yield return new WaitForSeconds(doubleClick);
@@ -209,10 +205,10 @@ public class HandleManager : MonoBehaviour
     }
     #endregion
 
-    #region µ¿ÀÛ
+    #region ë™ìž‘
     private void OnSingle(Vector2 _pos)
     {
-        Debug.Log($"´Ü¼ø ÅÍÄ¡ : {_pos}"); // TODO : ´Ü¼ø ÅÍÄ¡ µ¿ÀÛ
+        Debug.Log($"ë‹¨ìˆœ í„°ì¹˜ : {_pos}"); // TODO : ë‹¨ìˆœ í„°ì¹˜ ë™ìž‘
 #if UNITY_EDITOR
         AddClick(_pos, Color.cyan);
 #endif
@@ -220,7 +216,7 @@ public class HandleManager : MonoBehaviour
 
     private void OnDouble(Vector2 _pos)
     {
-        Debug.Log($"´õºí ÅÍÄ¡ : {_pos}"); // TODO : ´õºí ÅÍÄ¡ µ¿ÀÛ
+        Debug.Log($"ë”ë¸” í„°ì¹˜ : {_pos}"); // TODO : ë”ë¸” í„°ì¹˜ ë™ìž‘
 #if UNITY_EDITOR
         AddClick(_pos, Color.blue);
 #endif
@@ -263,13 +259,13 @@ public class HandleManager : MonoBehaviour
 #if UNITY_EDITOR
     private void OnRightClick(Vector2 _pos)
     {
-        Debug.Log($"¿ìÅ¬¸¯ : {_pos}"); // TODO : ¿ìÅ¬¸¯ µ¿ÀÛ
+        Debug.Log($"ìš°í´ë¦­ : {_pos}"); // TODO : ìš°í´ë¦­ ë™ìž‘
         AddClick(_pos, Color.yellow);
     }
 
     private void OnMiddleClick(Vector2 _pos)
     {
-        Debug.Log($"ÈÙÅ¬¸¯ : {_pos}"); // TODO : ÈÙÅ¬¸¯ µ¿ÀÛ
+        Debug.Log($"íœ í´ë¦­ : {_pos}"); // TODO : íœ í´ë¦­ ë™ìž‘
         AddClick(_pos, Color.red);
     }
 

@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Item : Entity
 {
@@ -45,7 +45,7 @@ public class Item : Entity
 
     public virtual void UseItem()
     {
-        Debug.Log(gameObject.name + " �ߵ�");
+        Debug.Log(gameObject.name + " 발동");
 
         EntityManager.Instance?.Remove(this);
     }

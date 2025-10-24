@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 using System.Text.RegularExpressions;
 
 [CreateAssetMenu(fileName = "Entity", menuName = "EntityData", order = 1)]

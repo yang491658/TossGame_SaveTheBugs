@@ -1,4 +1,4 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 using System.Collections.Generic;
 using System.Linq;
 using System.Collections;
@@ -78,7 +78,7 @@ public class EntityManager : MonoBehaviour
         SetEntity();
     }
 
-    #region Àû
+    #region ì 
     public Enemy SpawnEnemy(Vector2? _pos = null)
     {
         Vector2 pos = SpawnPos(_pos);
@@ -92,7 +92,7 @@ public class EntityManager : MonoBehaviour
     }
     #endregion
 
-    #region ¾ÆÀÌÅÛ
+    #region ì•„ì´í…œ
     private ItemData SearchItem(int _id) => itemDic.TryGetValue(_id, out var _data) ? _data : null;
 
     public Item SpawnItem(int _id = 0, Vector2? _pos = null)
@@ -116,7 +116,7 @@ public class EntityManager : MonoBehaviour
     }
     #endregion
 
-    #region °øÅë
+    #region ê³µí†µ
     private Vector2 SpawnPos(Vector2? _pos)
     {
         if (_pos.HasValue)
@@ -182,7 +182,7 @@ public class EntityManager : MonoBehaviour
     }
     #endregion
 
-    #region Á¦°Å
+    #region ì œê±°
     public void Remove(Enemy _enemy)
     {
         if (_enemy == null) return;

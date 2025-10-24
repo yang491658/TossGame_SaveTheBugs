@@ -1,4 +1,4 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 
 #if UNITY_EDITOR
 using UnityEditor;
@@ -24,7 +24,7 @@ public class Player : Entity
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        // TODO Å×½ºÆ®¿ë ¹«Àû¸ğµå
+        // TODO í…ŒìŠ¤íŠ¸ìš© ë¬´ì ëª¨ë“œ
         //if (collision.CompareTag("Enemy"))
         //GameManager.Instance?.GameOver();
 

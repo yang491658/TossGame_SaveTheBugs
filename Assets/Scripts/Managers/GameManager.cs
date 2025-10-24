@@ -1,4 +1,4 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
@@ -64,7 +64,7 @@ public class GameManager : MonoBehaviour
         HandleManager.Instance?.SetHandle();
     }
 
-    #region Á¡¼ö
+    #region ì ìˆ˜
     public void AddScore(int _score)
     {
         totalScore += _score;
@@ -78,7 +78,7 @@ public class GameManager : MonoBehaviour
     }
     #endregion
 
-    #region ÁøÇà
+    #region ì§„í–‰
     public void Pause(bool _pause)
     {
         if (IsPaused == _pause) return;

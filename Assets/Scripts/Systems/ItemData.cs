@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 using System.Text.RegularExpressions;
 
 #if UNITY_EDITOR

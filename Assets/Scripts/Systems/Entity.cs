@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 
 [RequireComponent(typeof(SpriteRenderer), typeof(Collider2D), typeof(Rigidbody2D))]
 public class Entity : MonoBehaviour
@@ -26,7 +26,7 @@ public class Entity : MonoBehaviour
     {
     }
 
-    #region �̵�
+    #region 이동
     public void Move(Vector2 _velocity) => rb.linearVelocity = _velocity;
     public void Stop() => Move(Vector2.zero);
     #endregion
