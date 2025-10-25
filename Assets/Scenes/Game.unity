@@ -1672,37 +1672,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 390655763}
   m_CullTransparentMesh: 1
---- !u!1 &393675691
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 393675692}
-  m_Layer: 0
-  m_Name: SpawnPos
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &393675692
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 393675691}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 7.5, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 2061510342}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &463422171
 GameObject:
   m_ObjectHideFlags: 0
@@ -3538,7 +3507,7 @@ BoxCollider2D:
   m_Enabled: 1
   serializedVersion: 3
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 1ab096c980afc26429ce302f1edaccce, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -4066,7 +4035,7 @@ BoxCollider2D:
   m_Enabled: 1
   serializedVersion: 3
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 1ab096c980afc26429ce302f1edaccce, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -5452,7 +5421,7 @@ BoxCollider2D:
   m_Enabled: 1
   serializedVersion: 3
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 1ab096c980afc26429ce302f1edaccce, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -6596,7 +6565,7 @@ BoxCollider2D:
   m_Enabled: 1
   serializedVersion: 3
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 1ab096c980afc26429ce302f1edaccce, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -6856,18 +6825,16 @@ MonoBehaviour:
   enemyBase: {fileID: 350016272964680081, guid: a6fe9cbba711a194a954b4585f725966, type: 3}
   itemBase: {fileID: 350016272964680081, guid: c76fbda9a388a614fa410949fae9715f, type: 3}
   itemDatas:
-  - {fileID: 11400000, guid: 7fefa9dfcf5317d44be7e29a1f1106df, type: 2}
+  - {fileID: 11400000, guid: b16054db90cb9964d8c087506e9c1e8e, type: 2}
   - {fileID: 11400000, guid: b5bd9d683e8771b4499758ba02559369, type: 2}
-  - {fileID: 11400000, guid: 79bbd9ead99807a44aa703bb0e93f1ca, type: 2}
-  - {fileID: 11400000, guid: 7ff7b06c4b3427240850029e8e935702, type: 2}
-  - {fileID: 11400000, guid: 11515134f404be44ab144992330fbebc, type: 2}
-  - {fileID: 11400000, guid: 22bb0ee1206b77e478684a22b12ee2b2, type: 2}
-  - {fileID: 11400000, guid: 3a318bf88593e5948b7a3db07f7bb2a3, type: 2}
-  - {fileID: 11400000, guid: 8a51cb950a25ddb44ace69eee366b0b2, type: 2}
-  - {fileID: 11400000, guid: a6fa1f26a055ddb48a1452f4617efb9b, type: 2}
-  - {fileID: 11400000, guid: d7c28f4c67ae07d4699c4216ca7f75f4, type: 2}
-  spawnPos: {fileID: 393675692}
-  spawnPosY: 12
+  - {fileID: 11400000, guid: 7f53c27dca4f5244dbc1fa7d13a4c6e2, type: 2}
+  - {fileID: 11400000, guid: 9d5cfe3e2a9986c4a9f5360dacc1a3df, type: 2}
+  - {fileID: 11400000, guid: c873902bc0d64be4ebc5004cc9a32c57, type: 2}
+  - {fileID: 11400000, guid: 17899ff0ef5bce344a738c6e1ef936cf, type: 2}
+  - {fileID: 11400000, guid: 22e193ecabfef024fb442af9624284a3, type: 2}
+  - {fileID: 11400000, guid: 266c053d7a665834f9efee5d3bcc664b, type: 2}
+  - {fileID: 11400000, guid: 83767c2d0d2be9c48a90d118ffed8698, type: 2}
+  - {fileID: 11400000, guid: 010e1c937e27f1d44be807098676d12e, type: 2}
   eDelay: 5
   iDelay: 10
   inGame: {fileID: 0}
@@ -6888,8 +6855,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 393675692}
+  m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2082764293
@@ -7538,7 +7504,7 @@ CircleCollider2D:
   m_Enabled: 1
   serializedVersion: 3
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 60dce2732b93f914ea65da9a671435a0, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0

@@ -136,10 +136,14 @@ public class EntityManager : MonoBehaviour
                  : edge == 1 ? new Vector2(minX, y)
                  : new Vector2(maxX, y);
 
-        return edge == 0 ? new Vector2(x, maxY) + Vector2.down
-             : edge == 1 ? new Vector2(x, minY) + Vector2.up
-             : edge == 2 ? new Vector2(minX, y) + Vector2.right
-             : new Vector2(maxX, y) + Vector2.left;
+        float p = 1.5f;
+        float ix = Random.Range(minX + p, maxX - p);
+        float iy = Random.Range(minY + p, maxY - p);
+
+        return edge == 0 ? new Vector2(ix, maxY) + Vector2.down
+             : edge == 1 ? new Vector2(ix, minY) + Vector2.up
+             : edge == 2 ? new Vector2(minX, iy) + Vector2.right
+             : new Vector2(maxX, iy) + Vector2.left;
     }
 
     public void ToggleSpawn(bool _on)

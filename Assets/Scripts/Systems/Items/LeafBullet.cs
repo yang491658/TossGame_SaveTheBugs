@@ -29,10 +29,8 @@ public class LeafBullet : Item
         }
     }
 
-    protected override void OnTriggerEnter2D(Collider2D _collision)
+    private void OnTriggerEnter2D(Collider2D _collision)
     {
-        base.OnTriggerEnter2D(_collision);
-
         if (_collision.CompareTag("Enemy") && isActive && !finished)
         {
             Stop();

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a41f9786e10cc74c89c54711f4abb29, type: 3}
   m_Name: Item06_Item 6
   m_EditorClassIdentifier: 
-  ID: 2
-  Name: LeafBullet
-  Image: {fileID: 21300000, guid: 952464bffa6ed4b44b78327473333e4d, type: 3}
-  scr: {fileID: 11500000, guid: 8f6d7616841aacd44b3586d267f674f6, type: 3}
+  ID: 6
+  Name: Item 6
+  Image: {fileID: 21300000, guid: 4619f55d9f3d87b41b18129dacb284c6, type: 3}
+  scr: {fileID: 0}

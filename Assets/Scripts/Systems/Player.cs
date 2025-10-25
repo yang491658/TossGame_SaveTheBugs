@@ -24,11 +24,15 @@ public class Player : Entity
 
     private void OnTriggerEnter2D(Collider2D _collision)
     {
-        // TODO 플레이 테스트
         //if (_collision.CompareTag("Enemy"))
         //    GameManager.Instance?.GameOver();
-
         //if (_collision.CompareTag("Item"))
         //    _collision.GetComponent<Item>().UseItem();
+    }
+
+    private void OnCollisionEnter2D(Collision2D _collision)
+    {
+        if (_collision.gameObject.CompareTag("Item"))
+            _collision.gameObject.GetComponent<Item>().UseItem();        
     }
 }
