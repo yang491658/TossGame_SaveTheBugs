@@ -6,7 +6,7 @@ using UnityEditor;
 
 public class Enemy : Entity
 {
-   private float speed = 1f;
+   private float speed = 3f;
 
 #if UNITY_EDITOR
     private void OnValidate()

@@ -208,7 +208,7 @@ public class HandleManager : MonoBehaviour
     #region 동작
     private void OnSingle(Vector2 _pos)
     {
-        Debug.Log($"단순 터치 : {_pos}"); // TODO : 단순 터치 동작
+        Debug.Log($"단순 터치 : {_pos}"); // TODO 단순 터치 동작
 #if UNITY_EDITOR
         AddClick(_pos, Color.cyan);
 #endif
@@ -216,7 +216,7 @@ public class HandleManager : MonoBehaviour
 
     private void OnDouble(Vector2 _pos)
     {
-        Debug.Log($"더블 터치 : {_pos}"); // TODO : 더블 터치 동작
+        Debug.Log($"더블 터치 : {_pos}"); // TODO 더블 터치 동작
 #if UNITY_EDITOR
         AddClick(_pos, Color.blue);
 #endif
@@ -224,7 +224,7 @@ public class HandleManager : MonoBehaviour
 
     private void OnDragBegin(Vector2 _pos)
     {
-        Debug.Log($"드래그 시작 : {_pos}"); // TODO : 드래그 시작 동작
+        Debug.Log($"드래그 시작 : {_pos}"); // TODO 드래그 시작 동작
 
         if (aimVisible)
         {
@@ -239,7 +239,7 @@ public class HandleManager : MonoBehaviour
 
     private void OnDragMove(Vector2 _start, Vector2 _current)
     {
-        Debug.Log($"드래그 진행"); // TODO : 드래그 진행 동작
+        Debug.Log($"드래그 진행"); // TODO 드래그 진행 동작
 
         if (aimVisible)
         {
@@ -253,7 +253,7 @@ public class HandleManager : MonoBehaviour
 
     private void OnDragEnd(Vector2 _start, Vector2 _end)
     {
-        Debug.Log($"드래그 종료 : {_start} → {_end}"); // TODO : 드래그 종료 동작
+        Debug.Log($"드래그 종료 : {_start} → {_end}"); // TODO 드래그 종료 동작
 
         if (aimVisible)
         {
@@ -265,13 +265,20 @@ public class HandleManager : MonoBehaviour
 #if UNITY_EDITOR
     private void OnRightClick(Vector2 _pos)
     {
-        Debug.Log($"우클릭 : {_pos}"); // TODO : 우클릭 동작
+        Debug.Log($"우클릭 : {_pos}"); // TODO 우클릭 동작
         AddClick(_pos, Color.yellow);
+
+        Collider2D hit = Physics2D.OverlapPoint(_pos, LayerMask.GetMask("Item"));
+        if (hit != null)
+        {
+            Item item = hit.GetComponent<Item>();
+            if (item != null) item.UseItem();
+        }
     }
 
     private void OnMiddleClick(Vector2 _pos)
     {
-        Debug.Log($"휠클릭 : {_pos}"); // TODO : 휠클릭 동작
+        Debug.Log($"휠클릭 : {_pos}"); // TODO 휠클릭 동작
         AddClick(_pos, Color.red);
     }
 

@@ -8,7 +8,7 @@ using UnityEditor;
 [CreateAssetMenu(fileName = "Item", menuName = "ItemData", order = 2)]
 public class ItemData : EntityData
 {
-    public Item scr;
+    public MonoScript scr;
 
 #if UNITY_EDITOR
     protected override void OnValidate()
@@ -38,6 +38,22 @@ public class ItemData : EntityData
             ID = m.Success ? int.Parse(m.Groups["num"].Value) : ID;
         }
         else ID = 0;
+
+        if (!string.IsNullOrEmpty(Name))
+        {
+            string[] guids = AssetDatabase.FindAssets(Name + " t:MonoScript");
+            for (int i = 0; i < guids.Length; i++)
+            {
+                string path = AssetDatabase.GUIDToAssetPath(guids[i]);
+                var ms = AssetDatabase.LoadAssetAtPath<MonoScript>(path);
+                var cls = ms != null ? ms.GetClass() : null;
+                if (cls != null && typeof(Item).IsAssignableFrom(cls) && cls.Name == Name)
+                {
+                    scr = ms;
+                    break;
+                }
+            }
+        }
 
         base.OnValidate();
         EditorUtility.SetDirty(this);

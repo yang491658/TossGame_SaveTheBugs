@@ -16,6 +16,8 @@ public class UIManager : MonoBehaviour
     [Header("InGame UI")]
     [SerializeField] private GameObject inGameUI;
     [SerializeField] private TextMeshProUGUI scoreText;
+    [SerializeField] private TextMeshProUGUI playTimeText;
+    private float playTime = 0f;
 
     [Header("Setting UI")]
     [SerializeField] private GameObject settingUI;
@@ -45,6 +47,8 @@ public class UIManager : MonoBehaviour
             inGameUI = GameObject.Find("InGameUI");
         if (scoreText == null)
             scoreText = GameObject.Find("InGameUI/Score/ScoreText")?.GetComponent<TextMeshProUGUI>();
+        if (playTimeText == null)
+            playTimeText = GameObject.Find("InGameUI/Score/PlayTimeText")?.GetComponent<TextMeshProUGUI>();
 
         if (settingUI == null)
             settingUI = GameObject.Find("SettingUI");
@@ -114,6 +118,14 @@ public class UIManager : MonoBehaviour
     private void Start()
     {
         UpdateScore(GameManager.Instance.GetTotalScore());
+    }
+
+    private void Update()
+    {
+        if (GameManager.Instance.IsPaused || GameManager.Instance.IsGameOver) return;
+
+        playTime += Time.deltaTime;
+        UpdatePlayTime();
     }
 
     private void OnEnable()
@@ -189,6 +201,15 @@ public class UIManager : MonoBehaviour
     #endregion
 
     #region 업데이트
+    public void ResetPlayTIme() => playTime = 0;
+
+    private void UpdatePlayTime()
+    {
+        int total = Mathf.FloorToInt(playTime);
+        string s = (total / 60).ToString("00") + ":" + (total % 60).ToString("00");
+        playTimeText.text = s;
+    }
+
     public void UpdateScore(int _score)
     {
         string s = _score.ToString("0000");

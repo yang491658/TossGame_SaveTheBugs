@@ -18,13 +18,9 @@ public class Entity : MonoBehaviour
         col.isTrigger = true;
     }
 
-    protected virtual void Start()
-    {
-    }
+    protected virtual void Start() { }
 
-    protected virtual void Update()
-    {
-    }
+    protected virtual void Update() { }
 
     #region 이동
     public void Move(Vector2 _velocity) => rb.linearVelocity = _velocity;

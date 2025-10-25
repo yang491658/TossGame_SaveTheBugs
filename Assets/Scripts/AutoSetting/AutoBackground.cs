@@ -86,7 +86,7 @@ public class AutoBackground : MonoBehaviour
 
     private void Scroll()
     {
-        speed = Mathf.Min(3f, speed + Time.deltaTime / 200f);
+        speed = Mathf.Min(3f, speed + Time.deltaTime / 20f);
 
         if (clone == null)
         {

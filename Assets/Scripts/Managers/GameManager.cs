@@ -56,6 +56,7 @@ public class GameManager : MonoBehaviour
 
         SoundManager.Instance?.PlayBGM("Default");
 
+        UIManager.Instance?.ResetPlayTIme();
         UIManager.Instance?.OpenUI(false);
 
         EntityManager.Instance?.SetEntity();
@@ -65,7 +66,7 @@ public class GameManager : MonoBehaviour
     }
 
     #region 점수
-    public void AddScore(int _score)
+    public void AddScore(int _score = 1)
     {
         totalScore += _score;
         OnChangeScore?.Invoke(totalScore);

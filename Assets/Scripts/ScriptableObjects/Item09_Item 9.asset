@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ID: 9
   Name: Item 9
-  Image: {fileID: 21300000, guid: a44137cf59154b842a0c59c56a809a15, type: 3}
-  item: {fileID: 0}
+  Image: {fileID: 21300000, guid: d372d81d5deb7564ead8162db7bc6017, type: 3}
+  scr: {fileID: 11500000, guid: 3c5acdf422aa9cd4e99ab327a06a9904, type: 3}
