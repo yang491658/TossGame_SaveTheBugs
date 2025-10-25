@@ -276,7 +276,7 @@ public class UIManager : MonoBehaviour
     public void SetInGameUI(float _margin)
     {
         var rt = inGameUI.GetComponent<RectTransform>();
-        rt.offsetMax = new Vector2(rt.offsetMax.x, -_margin);
+        rt.offsetMax = new Vector3(rt.offsetMax.x, -_margin);
     }
     #endregion
 

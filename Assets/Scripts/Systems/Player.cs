@@ -24,15 +24,11 @@ public class Player : Entity
 
     private void OnTriggerEnter2D(Collider2D _collision)
     {
+        // TODO 테스트용 무적모드
         //if (_collision.CompareTag("Enemy"))
         //    GameManager.Instance?.GameOver();
-        //if (_collision.CompareTag("Item"))
-        //    _collision.GetComponent<Item>().UseItem();
-    }
 
-    private void OnCollisionEnter2D(Collision2D _collision)
-    {
-        if (_collision.gameObject.CompareTag("Item"))
-            _collision.gameObject.GetComponent<Item>().UseItem();        
+        if (_collision.CompareTag("Item"))
+            _collision.GetComponent<Item>().UseItem();
     }
 }

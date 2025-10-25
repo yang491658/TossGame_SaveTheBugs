@@ -7,14 +7,7 @@ public class Item : Entity
     private float speed = 5f;
 
     private float timer = 0f;
-    private float delay = 15f;
-
-    protected override void Awake()
-    {
-        base.Awake();
-
-        col.isTrigger = false;
-    }
+    private float delay = 1.5f; // TODO 아이템 테스트
 
     protected override void Start()
     {
@@ -22,7 +15,7 @@ public class Item : Entity
 
         float angle = Random.Range(0f, 360f);
         float rad = angle * Mathf.Deg2Rad;
-        Vector2 dir = new Vector2(Mathf.Cos(rad), Mathf.Sin(rad)).normalized;
+        Vector3 dir = new Vector3(Mathf.Cos(rad), Mathf.Sin(rad)).normalized;
         Move(dir * speed);
     }
 

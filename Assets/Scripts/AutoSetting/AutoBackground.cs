@@ -95,8 +95,8 @@ public class AutoBackground : MonoBehaviour
             clone.position = img.position + Vector3.up * scroll;
         }
 
-        img.Translate(Vector2.down * speed * Time.deltaTime, Space.World);
-        clone.Translate(Vector2.down * speed * Time.deltaTime, Space.World);
+        img.Translate(Vector3.down * speed * Time.deltaTime, Space.World);
+        clone.Translate(Vector3.down * speed * Time.deltaTime, Space.World);
 
         float lower = cam.transform.position.y - scroll;
         if (img.position.y < lower)

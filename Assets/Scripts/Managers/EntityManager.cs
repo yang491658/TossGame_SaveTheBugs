@@ -74,9 +74,9 @@ public class EntityManager : MonoBehaviour
     }
 
     #region 적
-    public Enemy SpawnEnemy(Vector2? _pos = null)
+    public Enemy SpawnEnemy(Vector3? _pos = null)
     {
-        Vector2 pos = SpawnPos(SpawnKind.Enemy, _pos);
+        Vector3 pos = SpawnPos(SpawnKind.Enemy, _pos);
 
         Enemy e = Instantiate(enemyBase, pos, Quaternion.identity, enemyTrans)
             .GetComponent<Enemy>();
@@ -90,7 +90,7 @@ public class EntityManager : MonoBehaviour
     #region 아이템
     private ItemData SearchItem(int _id) => itemDic.TryGetValue(_id, out var _data) ? _data : null;
 
-    public Item SpawnItem(int _id = 0, Vector2? _pos = null)
+    public Item SpawnItem(int _id = 0, Vector3? _pos = null)
     {
         //if (items.Count >= 5) return null;
 
@@ -99,7 +99,7 @@ public class EntityManager : MonoBehaviour
             : SearchItem(_id);
         if (data == null) return null;
 
-        Vector2 pos = SpawnPos(SpawnKind.Item, _pos);
+        Vector3 pos = SpawnPos(SpawnKind.Item, _pos);
 
         var go = Instantiate(itemBase, pos, Quaternion.identity, itemTrans);
 
@@ -115,7 +115,7 @@ public class EntityManager : MonoBehaviour
     #endregion
 
     #region 공통
-    private Vector2 SpawnPos(SpawnKind _kind, Vector2? _pos)
+    private Vector3 SpawnPos(SpawnKind _kind, Vector3? _pos)
     {
         if (_pos.HasValue) return _pos.Value;
 
@@ -132,18 +132,18 @@ public class EntityManager : MonoBehaviour
         float y = enemy ? Random.Range(midY, maxY) : Random.Range(minY, maxY);
 
         if (enemy)
-            return edge == 0 ? new Vector2(x, maxY)
-                 : edge == 1 ? new Vector2(minX, y)
-                 : new Vector2(maxX, y);
+            return edge == 0 ? new Vector3(x, maxY)
+                 : edge == 1 ? new Vector3(minX, y)
+                 : new Vector3(maxX, y);
 
         float p = 1.5f;
         float ix = Random.Range(minX + p, maxX - p);
         float iy = Random.Range(minY + p, maxY - p);
 
-        return edge == 0 ? new Vector2(ix, maxY) + Vector2.down
-             : edge == 1 ? new Vector2(ix, minY) + Vector2.up
-             : edge == 2 ? new Vector2(minX, iy) + Vector2.right
-             : new Vector2(maxX, iy) + Vector2.left;
+        return edge == 0 ? new Vector3(ix, maxY) + Vector3.down
+             : edge == 1 ? new Vector3(ix, minY) + Vector3.up
+             : edge == 2 ? new Vector3(minX, iy) + Vector3.right
+             : new Vector3(maxX, iy) + Vector3.left;
     }
 
     public void ToggleSpawn(bool _on)
@@ -244,11 +244,11 @@ public class EntityManager : MonoBehaviour
     {
         if (enemies.Count == 0) return null;
         Enemy target = enemies[0];
-        float min = ((Vector3)target.transform.position - _pos).sqrMagnitude;
+        float min = (target.transform.position - _pos).sqrMagnitude;
         for (int i = 1; i < enemies.Count; i++)
         {
             Enemy e = enemies[i];
-            float d = ((Vector3)e.transform.position - _pos).sqrMagnitude;
+            float d = (e.transform.position - _pos).sqrMagnitude;
             if (d < min) { min = d; target = e; }
         }
         return target;

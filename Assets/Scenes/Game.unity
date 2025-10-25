@@ -1297,8 +1297,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 0}
   maxDrag: 3
-  ring: {fileID: 1019678744}
-  handle: {fileID: 1070203467}
+  ring: {fileID: 0}
+  handle: {fileID: 0}
   aimVisible: 0
   markDuration: 1
   markRadius: 0.5
@@ -1485,26 +1485,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c4f4d91872bc35d4eac4704e3f89e2cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inGameUI: {fileID: 463422171}
-  scoreText: {fileID: 1222573071}
-  playTimeText: {fileID: 1898468089}
-  settingUI: {fileID: 565046922}
-  settingScoreText: {fileID: 79075885}
-  bgmSlider: {fileID: 1367106577}
-  sfxSlider: {fileID: 892183346}
-  bgmIcon: {fileID: 185723935}
-  sfxIcon: {fileID: 1928568704}
-  bgmIcons:
-  - {fileID: 21300000, guid: 06a16cb520d0f2449a999572cae2cf97, type: 3}
-  - {fileID: 21300000, guid: cabad5b87dec1fd4e8749fa9f8936e63, type: 3}
-  sfxIcons:
-  - {fileID: 21300000, guid: fd30afab859581246b9ba7593ee3c10c, type: 3}
-  - {fileID: 21300000, guid: 2896697aee29fec4eae8809b364feeb0, type: 3}
-  - {fileID: 21300000, guid: d7f4f52e0d03f214b8b9ff47d92ab909, type: 3}
-  confirmUI: {fileID: 1922433877}
-  confirmText: {fileID: 137781734}
-  resultUI: {fileID: 578179199}
-  resultScoreText: {fileID: 180508595}
+  inGameUI: {fileID: 0}
+  scoreText: {fileID: 0}
+  playTimeText: {fileID: 0}
+  settingUI: {fileID: 0}
+  settingScoreText: {fileID: 0}
+  bgmSlider: {fileID: 0}
+  sfxSlider: {fileID: 0}
+  bgmIcon: {fileID: 0}
+  sfxIcon: {fileID: 0}
+  bgmIcons: []
+  sfxIcons: []
+  confirmUI: {fileID: 0}
+  confirmText: {fileID: 0}
+  resultUI: {fileID: 0}
+  resultScoreText: {fileID: 0}
 --- !u!4 &264004223
 Transform:
   m_ObjectHideFlags: 0
@@ -5283,12 +5278,8 @@ MonoBehaviour:
   bgmVol: 1
   sfxVol: 1
   soundClips:
-    bgmClips:
-    - {fileID: 8300000, guid: d76ecd11a0b575847ba2a1c53dea9f05, type: 3}
-    - {fileID: 8300000, guid: 49731314153f00046b85f50fdc038198, type: 3}
-    sfxClips:
-    - {fileID: 8300000, guid: 2bd74fec26584e646adfcee5d63449bd, type: 3}
-    - {fileID: 8300000, guid: ceebd236cb9506b488ca55c45d0c9580, type: 3}
+    bgmClips: []
+    sfxClips: []
 --- !u!4 &1640530186
 Transform:
   m_ObjectHideFlags: 0
@@ -6822,19 +6813,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8757234db11563c478a55d79795ecf2f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyBase: {fileID: 350016272964680081, guid: a6fe9cbba711a194a954b4585f725966, type: 3}
-  itemBase: {fileID: 350016272964680081, guid: c76fbda9a388a614fa410949fae9715f, type: 3}
-  itemDatas:
-  - {fileID: 11400000, guid: b16054db90cb9964d8c087506e9c1e8e, type: 2}
-  - {fileID: 11400000, guid: b5bd9d683e8771b4499758ba02559369, type: 2}
-  - {fileID: 11400000, guid: 7f53c27dca4f5244dbc1fa7d13a4c6e2, type: 2}
-  - {fileID: 11400000, guid: 9d5cfe3e2a9986c4a9f5360dacc1a3df, type: 2}
-  - {fileID: 11400000, guid: c873902bc0d64be4ebc5004cc9a32c57, type: 2}
-  - {fileID: 11400000, guid: 17899ff0ef5bce344a738c6e1ef936cf, type: 2}
-  - {fileID: 11400000, guid: 22e193ecabfef024fb442af9624284a3, type: 2}
-  - {fileID: 11400000, guid: 266c053d7a665834f9efee5d3bcc664b, type: 2}
-  - {fileID: 11400000, guid: 83767c2d0d2be9c48a90d118ffed8698, type: 2}
-  - {fileID: 11400000, guid: 010e1c937e27f1d44be807098676d12e, type: 2}
+  enemyBase: {fileID: 0}
+  itemBase: {fileID: 0}
+  itemDatas: []
   eDelay: 5
   iDelay: 10
   inGame: {fileID: 0}
@@ -7504,7 +7485,7 @@ CircleCollider2D:
   m_Enabled: 1
   serializedVersion: 3
   m_Density: 1
-  m_Material: {fileID: 6200000, guid: 60dce2732b93f914ea65da9a671435a0, type: 2}
+  m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0

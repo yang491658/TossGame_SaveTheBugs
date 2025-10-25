@@ -3,7 +3,7 @@ using UnityEngine;
 public class FlowerBomb : Item
 {
     private float spin = 15f;
-    private float duration = 10f;
+    private float duration = 8f;
 
     protected override void Update()
     {

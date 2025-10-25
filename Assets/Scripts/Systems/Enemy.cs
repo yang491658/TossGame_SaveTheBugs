@@ -21,7 +21,7 @@ public class Enemy : Entity
 
         var p = EntityManager.Instance?.GetPlayer();
 
-        Vector2 dir = (p.transform.position - transform.position).normalized;
+        Vector3 dir = (p.transform.position - transform.position).normalized;
         Move(dir * speed);
     }
 

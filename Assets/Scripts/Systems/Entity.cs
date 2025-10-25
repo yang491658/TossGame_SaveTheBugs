@@ -23,8 +23,8 @@ public class Entity : MonoBehaviour
     protected virtual void Update() { }
 
     #region 이동
-    public void Move(Vector2 _velocity) => rb.linearVelocity = _velocity;
-    public void Stop() => Move(Vector2.zero);
+    public void Move(Vector3 _velocity) => rb.linearVelocity = _velocity;
+    public void Stop() => Move(Vector3.zero);
     #endregion
 
     #region SET

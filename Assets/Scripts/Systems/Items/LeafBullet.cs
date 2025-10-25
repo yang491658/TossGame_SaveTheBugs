@@ -5,38 +5,31 @@ public class LeafBullet : Item
     private float spin = 150f;
     private float duration = 3f;
 
+    private bool isOrigin = true;
     private int amount = 3;
-    private float shot = 10f;
-    private float maxDistance = 8f;
 
-    private Vector2 origin;
-    private bool finished;
+    private bool isMoving = true;
+    private float shot = 10f;
+    private Vector3 origin;
+    private float minDistance = 3f;
 
     protected override void Update()
     {
         base.Update();
-
-        if (isActive)
-        {
-            transform.Rotate(0f, 0f, spin * Time.deltaTime);
-            if (!finished && Vector2.Distance(transform.position, origin) >= maxDistance)
-            {
-                Stop();
-                transform.localScale *= 1.5f;
-                spin *= 2f;
-                finished = true;
-            }
-        }
+        if (isActive) transform.Rotate(0f, 0f, spin * Time.deltaTime);
     }
 
     private void OnTriggerEnter2D(Collider2D _collision)
     {
-        if (_collision.CompareTag("Enemy") && isActive && !finished)
+        if (_collision.CompareTag("Enemy") && isActive && isMoving)
         {
-            Stop();
-            transform.localScale *= 1.5f;
-            spin *= 2f;
-            finished = true;
+            if ((transform.position - origin).magnitude > minDistance)
+            {
+                Stop();
+                transform.localScale *= 1.5f;
+                spin *= 2f;
+                isMoving = false;
+            }
         }
     }
 
@@ -44,36 +37,32 @@ public class LeafBullet : Item
     {
         if (isActive) return;
 
-        base.UseItem();
-
         origin = transform.position;
 
-        var target = EntityManager.Instance.GetEnemyClosest((Vector3)transform.position);
-        Vector2 dir = target != null
-            ? ((Vector2)target.transform.position - (Vector2)transform.position).normalized
-            : Vector2.up;
-
-        Fire(dir);
-
-        for (int i = 1; i < amount; i++)
+        if (isOrigin)
         {
-            var clone = Instantiate(gameObject, transform.position, Quaternion.identity, transform.parent);
-            var lb = clone.GetComponent<LeafBullet>();
-            lb.Activate(dir);
+            for (int i = 1; i < amount; i++)
+            {
+                Instantiate(gameObject, transform.position, Quaternion.identity, transform.parent)
+                   .GetComponent<LeafBullet>()
+                   .SetClone();
+            }
         }
-    }
 
-    private void Activate(Vector2 _dir)
-    {
-        if (isActive) return;
         base.UseItem();
-        origin = transform.position;
-        Fire(_dir);
+        Fire();
     }
 
-    private void Fire(Vector2 _dir)
+    private void Fire()
     {
-        Move(_dir * shot);
+        Enemy target = EntityManager.Instance.GetEnemyRandom();
+        Vector3 dir = target != null
+            ? (target.transform.position - transform.position).normalized
+            : Vector3.up;
+
+        Move(dir * shot);
         EntityManager.Instance?.RemoveItem(this, duration);
     }
+
+    public void SetClone() => isOrigin = false;
 }
