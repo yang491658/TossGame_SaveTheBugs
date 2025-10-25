@@ -178,7 +178,7 @@ public class HandleManager : MonoBehaviour
         {
             isDoubleClick = true;
             time = Time.time;
-            StartCoroutine(SingleCoroutine(worldPos));
+            StartCoroutine(ClickCoroutine(worldPos));
         }
 
         isDragging = false;
@@ -194,7 +194,7 @@ public class HandleManager : MonoBehaviour
         return _start + Vector2.ClampMagnitude(delta, maxDrag);
     }
 
-    private IEnumerator SingleCoroutine(Vector2 _pos)
+    private IEnumerator ClickCoroutine(Vector2 _pos)
     {
         yield return new WaitForSeconds(doubleClick);
         if (isDoubleClick)
