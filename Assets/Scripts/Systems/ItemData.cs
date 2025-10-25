@@ -8,6 +8,8 @@ using UnityEditor;
 [CreateAssetMenu(fileName = "Item", menuName = "ItemData", order = 2)]
 public class ItemData : EntityData
 {
+    public Item scr;
+
 #if UNITY_EDITOR
     protected override void OnValidate()
     {

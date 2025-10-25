@@ -15,3 +15,4 @@ MonoBehaviour:
   ID: 3
   Name: Item 3
   Image: {fileID: 21300000, guid: abc1c385d3cab384eb100d549cd69798, type: 3}
+  item: {fileID: 0}

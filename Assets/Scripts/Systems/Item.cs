@@ -4,11 +4,12 @@ public class Item : Entity
 {
     private float speed = 3.5f;
     private int bounce = 0;
+    public bool isActive { private set; get; } = false;
 
     protected override void Start()
     {
         base.Start();
-        
+
         float angle = Random.Range(180f, 360f);
         float rad = angle * Mathf.Deg2Rad;
         Vector2 dir = new Vector2(Mathf.Cos(rad), Mathf.Sin(rad)).normalized;
@@ -36,17 +37,22 @@ public class Item : Entity
             Move(v);
             bounce++;
         }
+
+        if (_collision.CompareTag("Enemy") && isActive)
+            EntityManager.Instance?.RemoveItem(_collision.GetComponent<Item>());
     }
 
     private void OnBecameInvisible()
     {
-        EntityManager.Instance?.Remove(this);
+        EntityManager.Instance?.RemoveItem(this);
     }
 
     public virtual void UseItem()
     {
+        if (isActive) return;
+        
         Debug.Log(gameObject.name + " 발동");
 
-        EntityManager.Instance?.Remove(this);
+        isActive = true;
     }
 }

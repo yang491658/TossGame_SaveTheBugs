@@ -19,7 +19,7 @@ TagManager:
   - Player
   - Enemy
   - Item
-  - Weapon
+  - 
   - 
   - 
   - 
@@ -48,8 +48,14 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Item
+    uniqueID: 778183641
+    locked: 0
+  - name: Enemy
+    uniqueID: 2540178107
+    locked: 0
   - name: Player
-    uniqueID: 2054990023
+    uniqueID: 584472609
     locked: 0
   m_RenderingLayers:
   - Default

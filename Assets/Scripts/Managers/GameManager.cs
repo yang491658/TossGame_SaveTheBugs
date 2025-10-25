@@ -3,15 +3,15 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    public static GameManager Instance { get; private set; }
+    public static GameManager Instance { private set; get; }
 
     [Header("Score")]
     [SerializeField] private int totalScore = 0;
     private float scoreAdd = 0f;
     public event System.Action<int> OnChangeScore;
 
-    public bool IsPaused { get; private set; } = false;
-    public bool IsGameOver { get; private set; } = false;
+    public bool IsPaused { private set; get; } = false;
+    public bool IsGameOver { private set; get; } = false;
 
     private void Awake()
     {
@@ -57,7 +57,7 @@ public class GameManager : MonoBehaviour
         SoundManager.Instance?.PlayBGM("Default");
 
         UIManager.Instance?.OpenUI(false);
-     
+
         EntityManager.Instance?.SetEntity();
         EntityManager.Instance?.ToggleSpawn(true);
 

@@ -4,7 +4,7 @@ using GoogleMobileAds.Api;
 
 public class ADManager : MonoBehaviour
 {
-    public static ADManager Instance { get; private set; }
+    public static ADManager Instance { private set; get; }
 
     [SerializeField][Min(0)] private float delay = 0.5f;
 

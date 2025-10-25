@@ -9,7 +9,7 @@ using UnityEditor;
 
 public class EntityManager : MonoBehaviour
 {
-    public static EntityManager Instance { get; private set; }
+    public static EntityManager Instance { private set; get; }
 
     [Header("Data Setting")]
     [SerializeField] private GameObject enemyBase;
@@ -183,7 +183,7 @@ public class EntityManager : MonoBehaviour
     #endregion
 
     #region 제거
-    public void Remove(Enemy _enemy)
+    public void RemoveEnemy(Enemy _enemy)
     {
         if (_enemy == null) return;
 
@@ -192,22 +192,22 @@ public class EntityManager : MonoBehaviour
         Destroy(_enemy.gameObject);
     }
 
-    public void Remove(Item _item)
+    public void RemoveItem(Item _item, float _duration = 0f)
     {
         if (_item == null) return;
 
         items.Remove(_item);
 
-        Destroy(_item.gameObject);
+        Destroy(_item.gameObject, _duration);
     }
 
     public void RemoveAll()
     {
         for (int i = enemies.Count - 1; i >= 0; i--)
-            Remove(enemies[i]);
+            RemoveEnemy(enemies[i]);
 
         for (int i = items.Count - 1; i >= 0; i--)
-            Remove(items[i]);
+            RemoveItem(items[i]);
     }
     #endregion
 

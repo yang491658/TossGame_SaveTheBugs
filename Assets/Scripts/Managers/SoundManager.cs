@@ -13,7 +13,7 @@ public struct SoundClip
 
 public class SoundManager : MonoBehaviour
 {
-    public static SoundManager Instance { get; private set; }
+    public static SoundManager Instance { private set; get; }
 
     [Header("Source")]
     [SerializeField] private AudioSource bgmSource;

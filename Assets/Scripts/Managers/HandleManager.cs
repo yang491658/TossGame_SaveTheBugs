@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 public class HandleManager : MonoBehaviour
 {
-    public static HandleManager Instance { get; private set; }
+    public static HandleManager Instance { private set; get; }
 
     private Camera cam => Camera.main;
     private LayerMask layer;
@@ -224,6 +224,8 @@ public class HandleManager : MonoBehaviour
 
     private void OnDragBegin(Vector2 _pos)
     {
+        Debug.Log($"드래그 시작 : {_pos}"); // TODO : 드래그 시작 동작
+
         if (aimVisible)
         {
             ring.gameObject.SetActive(true);
@@ -237,6 +239,8 @@ public class HandleManager : MonoBehaviour
 
     private void OnDragMove(Vector2 _start, Vector2 _current)
     {
+        Debug.Log($"드래그 진행"); // TODO : 드래그 진행 동작
+
         if (aimVisible)
         {
             float scale = 2f * Vector2.Distance(_start, _current);
@@ -249,6 +253,8 @@ public class HandleManager : MonoBehaviour
 
     private void OnDragEnd(Vector2 _start, Vector2 _end)
     {
+        Debug.Log($"드래그 종료 : {_start} → {_end}"); // TODO : 드래그 종료 동작
+
         if (aimVisible)
         {
             ring.gameObject.SetActive(false);

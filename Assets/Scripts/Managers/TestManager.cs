@@ -4,7 +4,7 @@ using System.Collections;
 
 public class TestManager : MonoBehaviour
 {
-    public static TestManager Instance { get; private set; }
+    public static TestManager Instance { private set; get; }
 
     [Header("Game Test")]
     [SerializeField] private int testCount = 1;

@@ -27,6 +27,6 @@ public class Enemy : Entity
 
     private void OnBecameInvisible()
     {
-        EntityManager.Instance?.Remove(this);
+        EntityManager.Instance?.RemoveEnemy(this);
     }
 }

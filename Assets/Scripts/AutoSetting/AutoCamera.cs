@@ -10,7 +10,7 @@ public class AutoCamera : MonoBehaviour
     [SerializeField] private float baseSize = 12f;
     [SerializeField] private float minSize = 12f;
 
-    public static float SizeDelta { get; private set; } = 0f;
+    public static float SizeDelta { private set; get; } = 0f;
 
     private void Awake()
     {
