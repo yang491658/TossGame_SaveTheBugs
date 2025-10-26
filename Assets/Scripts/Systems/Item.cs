@@ -8,6 +8,14 @@ public class Item : Entity
 
     private float timer = 0f;
     private float delay = 1.5f; // TODO 아이템 테스트
+    private Collider2D backCol;
+
+    protected override void Awake()
+    {
+        base.Awake();
+
+        backCol = transform.Find("Background").GetComponent<Collider2D>();
+    }
 
     protected override void Start()
     {
@@ -24,8 +32,8 @@ public class Item : Entity
         base.Update();
 
         timer += Time.deltaTime;
-
-        if (timer > delay) col.isTrigger = true;
+        if (timer > delay && backCol != null)
+            backCol.isTrigger = true;
     }
 
     private void OnTriggerStay2D(Collider2D _collision)
@@ -51,6 +59,6 @@ public class Item : Entity
         sr.sortingOrder = -1;
         col.isTrigger = true;
         isActive = true;
-        Destroy(transform.Find("Background").gameObject);
+        Destroy(backCol.gameObject);
     }
 }

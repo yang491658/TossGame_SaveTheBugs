@@ -2353,6 +2353,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 0.5
+  img: {fileID: 0}
+  clone: {fileID: 0}
 --- !u!1 &834979570
 GameObject:
   m_ObjectHideFlags: 0

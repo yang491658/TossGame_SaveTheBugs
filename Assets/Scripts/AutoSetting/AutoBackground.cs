@@ -11,7 +11,7 @@ public class AutoBackground : MonoBehaviour
 
     [Header("Scroll")]
     [SerializeField] private float speed = 0.5f;
-    private Transform img, clone;
+    [SerializeField] private Transform img, clone;
     private float scroll;
 
 #if UNITY_EDITOR
@@ -19,7 +19,7 @@ public class AutoBackground : MonoBehaviour
     {
         if (enabled) Fit();
 
-        if (img == null) img = GameObject.Find("Image")?.transform;
+        if (img == null) img = transform.Find("Image");
     }
 #endif
 

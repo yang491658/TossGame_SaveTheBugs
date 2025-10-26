@@ -8,7 +8,6 @@ public class ADManager : MonoBehaviour
 
     [SerializeField][Min(0)] private float delay = 0.5f;
 
-    private string bannerId;
     private BannerView banner;
 
     private InterstitialAd interAD;
@@ -55,7 +54,6 @@ public class ADManager : MonoBehaviour
     {
         MobileAds.Initialize(_ => { });
 
-        bannerId = BANNER_ID;
         CreateBanner(true);
         LoadInterAD();
         LoadReward();
@@ -97,7 +95,7 @@ public class ADManager : MonoBehaviour
             if (banner == null)
             {
                 var size = AdSize.GetCurrentOrientationAnchoredAdaptiveBannerAdSizeWithWidth(AdSize.FullWidth);
-                banner = new BannerView(bannerId, size, AdPosition.Top);
+                banner = new BannerView(BANNER_ID, size, AdPosition.Top);
                 banner.LoadAd(new AdRequest());
                 RegisterBanner();
 

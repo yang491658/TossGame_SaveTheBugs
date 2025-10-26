@@ -229,7 +229,6 @@ public class EntityManager : MonoBehaviour
         if (enemyTrans == null) enemyTrans = GameObject.Find("InGame/Enemies")?.transform;
         if (itemTrans == null) itemTrans = GameObject.Find("InGame/Items")?.transform;
 
-        float d = AutoCamera.SizeDelta;
     }
     #endregion
 
