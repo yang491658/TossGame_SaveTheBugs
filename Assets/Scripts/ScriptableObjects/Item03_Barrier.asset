@@ -16,4 +16,4 @@ MonoBehaviour:
   Name: Barrier
   Image: {fileID: 21300000, guid: 9bcc9ddd8a017c640a62c7ece9136c8a, type: 3}
   Script: {fileID: 11500000, guid: f91422d2f33fffd41b384ca9a05caa72, type: 3}
-  Sort: 3
+  Sort: 4

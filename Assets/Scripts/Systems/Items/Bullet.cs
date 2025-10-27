@@ -1,5 +1,6 @@
-using UnityEngine;
+using System;
 using System.Collections;
+using UnityEngine;
 
 public class Bullet : Item
 {
@@ -7,12 +8,19 @@ public class Bullet : Item
     private float scale = 0.5f;
     #endregion
     #region ´É·Â
+    private Transform player;
     private bool isOrigin = true;
     private int count = 10;
     private float shot = 20f;
     private Vector3 direction = Vector3.up;
-    private float delay = 0.3f;
+    private float delay = 0.1f;
     #endregion
+
+    private void LateUpdate()
+    {
+        if (isActive && player != null)
+            transform.position = player.position;
+    }
 
     public override void UseItem()
     {
@@ -23,11 +31,10 @@ public class Bullet : Item
         {
             Stop();
 
-            transform.SetParent(EntityManager.Instance?.GetPlayer().transform);
-            transform.localPosition = Vector3.zero;
             transform.localScale *= scale;
-
             rb.bodyType = RigidbodyType2D.Kinematic;
+
+            player = EntityManager.Instance?.GetPlayer().transform;
 
             StartCoroutine(FireCoroutine());
         }
@@ -37,7 +44,6 @@ public class Bullet : Item
 
             Fire();
         }
-
     }
 
     private IEnumerator FireCoroutine()
@@ -48,7 +54,7 @@ public class Bullet : Item
                 .GetComponent<Bullet>();
 
             clone.SetClone();
-            //clone.SetDirection(direction);
+            clone.SetDirection(EntityManager.Instance.GetPlayer().transform.up);
             clone.UseItem();
 
             count--;

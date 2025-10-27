@@ -8,7 +8,7 @@ public class HandleManager : MonoBehaviour
     public static HandleManager Instance { private set; get; }
 
     private Camera cam => Camera.main;
-    private LayerMask layer;
+    private LayerMask layer = ~0;
     private float time;
 
     [Header("Entity")]
@@ -110,26 +110,20 @@ public class HandleManager : MonoBehaviour
         return cam.ScreenToWorldPoint(p);
     }
 
-    private bool CanSelect(Collider2D _col) => layer == 0 || _col != null;
-
     #region 구분
     private void HandleBegin(Vector3 _pos, int _fingerID = -1)
     {
         if (IsOverUI(_fingerID)) return;
 
         Vector3 worldPos = ScreenToWorld(_pos);
-        Collider2D hit = Physics2D.OverlapPoint(worldPos, layer);
 
-        if (CanSelect(hit))
-        {
-            isDragging = false;
-            dragStart = worldPos;
-            dragCurrent = dragStart;
+        isDragging = false;
+        dragStart = worldPos;
+        dragCurrent = dragStart;
 #if UNITY_EDITOR
-            dragPath.Clear();
-            dragPath.Add(dragStart);
+        dragPath.Clear();
+        dragPath.Add(dragStart);
 #endif
-        }
     }
 
     private void HandleMove(Vector3 _pos)

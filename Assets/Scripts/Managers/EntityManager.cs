@@ -9,9 +9,11 @@ using UnityEditor;
 
 public class EntityManager : MonoBehaviour
 {
+    public static EntityManager Instance { private set; get; }
+
     private enum SpawnKind { Enemy, Item }
 
-    public static EntityManager Instance { private set; get; }
+    private Camera cam;
 
     [Header("Data Setting")]
     [SerializeField] private GameObject enemyBase;
@@ -117,7 +119,6 @@ public class EntityManager : MonoBehaviour
     {
         if (_pos.HasValue) return _pos.Value;
 
-        var cam = Camera.main;
         float h = cam.orthographicSize, w = h * cam.aspect;
         Vector3 c = cam.transform.position;
 
@@ -227,6 +228,7 @@ public class EntityManager : MonoBehaviour
         if (enemyTrans == null) enemyTrans = GameObject.Find("InGame/Enemies")?.transform;
         if (itemTrans == null) itemTrans = GameObject.Find("InGame/Items")?.transform;
 
+        cam = Camera.main;
     }
     #endregion
 

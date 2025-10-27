@@ -8,6 +8,7 @@ public class Barrier : Item
     #endregion
 
     #region ´É·Â
+    private Transform  player;
     private float duration = 10f;
     #endregion
 
@@ -19,19 +20,23 @@ public class Barrier : Item
             transform.Rotate(0f, 0f, spin * Time.deltaTime);
     }
 
+    private void LateUpdate()
+    {
+        if (isActive)
+            transform.position = player.position;
+    }
+
     public override void UseItem()
     {
         if (isActive) return;
         base.UseItem();
 
         Stop();
-        
-        transform.SetParent(EntityManager.Instance?.GetPlayer().transform);
-        transform.localPosition = Vector3.zero;
-        transform.localScale *= scale;
 
+        transform.localScale *= scale;
         rb.bodyType = RigidbodyType2D.Kinematic;
 
+        player = EntityManager.Instance?.GetPlayer().transform;
         EntityManager.Instance?.RemoveItem(this, duration);
     }
 }

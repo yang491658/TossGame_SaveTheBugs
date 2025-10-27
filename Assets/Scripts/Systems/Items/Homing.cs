@@ -5,7 +5,7 @@ public class Homing : Item
 {
     #region 스케일
     private float scale = 3f;
-    private float spin = 180f;
+    private float spin = 360f;
     #endregion
 
     #region 능력
@@ -40,6 +40,7 @@ public class Homing : Item
                 Stop();
 
                 transform.localScale *= scale;
+                sr.sortingOrder = 1;
                 spin *= scale;
                 isMoving = false;
 

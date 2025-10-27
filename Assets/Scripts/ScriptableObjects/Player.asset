@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ID: 0
   Name: Player
-  Image: {fileID: 21300000, guid: 56093ce9f08a60541981c85f28640da0, type: 3}
+  Image: {fileID: 21300000, guid: 9c1b4490944571742bb745b4fd3d5a53, type: 3}

@@ -15,6 +15,13 @@ public class Enemy : Entity
     }
 #endif
 
+    protected override void Awake()
+    {
+        base.Awake();
+
+        SetData(data);
+    }
+
     protected override void Start()
     {
         base.Start();

@@ -29,8 +29,6 @@ public class Item : Entity
 
     protected override void Update()
     {
-        base.Update();
-
         timer += Time.deltaTime;
         if (timer > delay && backCol != null)
             backCol.isTrigger = true;
