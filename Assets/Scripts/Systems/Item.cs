@@ -4,7 +4,7 @@ public class Item : Entity
 {
     public bool isActive { private set; get; } = false;
 
-    private float speed = 5f;
+    private float speed = 3.5f;
 
     private float timer = 0f;
     private float delay = 15f;
@@ -21,10 +21,13 @@ public class Item : Entity
     {
         base.Start();
 
-        float angle = Random.Range(0f, 360f);
-        float rad = angle * Mathf.Deg2Rad;
-        Vector3 dir = new Vector3(Mathf.Cos(rad), Mathf.Sin(rad)).normalized;
-        Move(dir * speed);
+        if (!isActive)
+        {
+            float angle = Random.Range(0f, 360f);
+            float rad = angle * Mathf.Deg2Rad;
+            Vector3 dir = new Vector3(Mathf.Cos(rad), Mathf.Sin(rad)).normalized;
+            Move(dir * speed);
+        }
     }
 
     protected override void Update()
@@ -51,8 +54,6 @@ public class Item : Entity
     public virtual void UseItem()
     {
         if (isActive) return;
-
-        Debug.Log(gameObject.name + " 발동");
 
         sr.sortingOrder = ((ItemData)data).Sort;
         col.isTrigger = true;

@@ -3,7 +3,7 @@ using UnityEngine;
 public class Bomb : Item
 {
     #region ½ºÄÉÀÏ
-    private float scale = 5f;
+    private float scale = 3.5f;
     private float spin = 30f;
     #endregion
 

@@ -4,25 +4,27 @@ using System.Collections;
 public class Homing : Item
 {
     #region 스케일
-    private float scale = 3f;
+    private float scale = 2.5f;
     private float spin = 360f;
     #endregion
 
     #region 능력
+    private Player player;
     private bool isOrigin = true;
     private int count = 3;
     private float angle = 90f;
 
     private bool isMoving = true;
-    private float shot = 10f;
+    private float speed = 10f;
     private Vector3 direction = Vector3.up;
     private Vector3 basePos;
-    private float minDistance = 5f;
+    private float distance = 5f;
     private float duration = 3.5f;
 
     private bool isHoming = false;
     private Enemy target;
     #endregion
+
     protected override void Update()
     {
         base.Update();
@@ -35,7 +37,7 @@ public class Homing : Item
     {
         if (_collision.CompareTag("Enemy") && isActive && isMoving)
         {
-            if ((transform.position - basePos).sqrMagnitude > (minDistance * minDistance))
+            if ((transform.position - basePos).sqrMagnitude > (distance * distance))
             {
                 Stop();
 
@@ -58,18 +60,20 @@ public class Homing : Item
 
         if (isOrigin)
         {
+            player = EntityManager.Instance?.GetPlayer();
+
             int cloneCount = count - 1;
             float start = -angle * 0.5f;
             float step = cloneCount <= 0 ? 0f : angle / (count - 1);
 
-            direction = SetRotate(direction, start);
+            SetDirection(SetRotate(direction, start));
 
             for (int i = 1; i <= cloneCount; i++)
             {
                 float deg = start + step * i;
                 Vector3 dir = SetRotate(direction, deg - start);
 
-                Homing clone = EntityManager.Instance.SpawnItem(data.ID, transform.position)
+                Homing clone = EntityManager.Instance.SpawnItem(data.ID, player.transform.position)
                     .GetComponent<Homing>();
 
                 clone.SetClone();
@@ -86,7 +90,7 @@ public class Homing : Item
         while (isMoving)
         {
             if (!isHoming)
-                if ((transform.position - basePos).sqrMagnitude >= (minDistance * minDistance))
+                if ((transform.position - basePos).sqrMagnitude >= (distance * distance))
                     isHoming = true;
 
             if (isHoming)
@@ -101,7 +105,7 @@ public class Homing : Item
             if (direction == Vector3.zero)
                 direction = Vector3.up;
 
-            Move(direction * shot);
+            Move(direction * speed);
 
             yield return null;
         }
@@ -109,7 +113,13 @@ public class Homing : Item
 
     #region SET
     public void SetClone() => isOrigin = false;
-    public void SetDirection(Vector3 _dir) => direction = _dir;
+
+    public void SetDirection(Vector3 _dir)
+    {
+        transform.up = _dir;
+        direction = _dir;
+    }
+
     private Vector3 SetRotate(Vector3 _dir, float _deg)
     {
         float r = _deg * Mathf.Deg2Rad;

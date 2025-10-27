@@ -3,7 +3,7 @@ using UnityEngine;
 public class Missile : Item
 {
     #region 스케일
-    private float scale = 3.5f;
+    private float scale = 3f;
     #endregion
 
     #region 능력

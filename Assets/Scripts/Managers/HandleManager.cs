@@ -19,7 +19,7 @@ public class HandleManager : MonoBehaviour
     private bool isDoubleClick;
 
     [Header("Drag")]
-    [SerializeField][Min(0f)] private float maxDrag = 3f;
+    [SerializeField][Min(0f)] private float maxDrag = 5f;
     private const float drag = 0.15f;
     private bool isDragging;
     private Vector3 dragStart;
@@ -65,7 +65,7 @@ public class HandleManager : MonoBehaviour
 
     private void Update()
     {
-        if (GameManager.Instance.IsPaused) return;
+        //if (GameManager.Instance.IsPaused) return;
 
 #if UNITY_EDITOR
         HandleMouse();
@@ -223,8 +223,6 @@ public class HandleManager : MonoBehaviour
 
     private void OnDragBegin(Vector3 _pos)
     {
-        Debug.Log($"드래그 시작 : {_pos}"); // TODO 드래그 시작 동작
-
         if (aimVisible)
         {
             ring.gameObject.SetActive(true);
@@ -238,8 +236,6 @@ public class HandleManager : MonoBehaviour
 
     private void OnDragMove(Vector3 _start, Vector3 _current)
     {
-        Debug.Log($"드래그 진행"); // TODO 드래그 진행 동작
-
         if (aimVisible)
         {
             float scale = 2f * Vector3.Distance(_start, _current);
@@ -252,8 +248,6 @@ public class HandleManager : MonoBehaviour
 
     private void OnDragEnd(Vector3 _start, Vector3 _end)
     {
-        Debug.Log($"드래그 종료 : {_start} → {_end}"); // TODO 드래그 종료 동작
-
         if (aimVisible)
         {
             ring.gameObject.SetActive(false);

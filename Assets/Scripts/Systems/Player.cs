@@ -31,4 +31,8 @@ public class Player : Entity
         if (_collision.CompareTag("Item"))
             _collision.GetComponent<Item>().UseItem();
     }
+
+    #region
+    public float GetSpeed() => rb.linearVelocity.magnitude;
+    #endregion
 }
