@@ -2,9 +2,14 @@ using UnityEngine;
 
 public class Bomb : Item
 {
-    private float spin = 30f;
-    private float duration = 10f;
+    #region 스케일
     private float scale = 5f;
+    private float spin = 30f;
+    #endregion
+
+    #region 능력
+    private float duration = 10f;
+    #endregion
 
     protected override void Update()
     {
@@ -17,7 +22,6 @@ public class Bomb : Item
     public override void UseItem()
     {
         if (isActive) return;
-
         base.UseItem();
 
         Stop();

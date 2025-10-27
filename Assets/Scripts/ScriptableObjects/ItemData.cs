@@ -8,7 +8,8 @@ using UnityEditor;
 [CreateAssetMenu(fileName = "Item", menuName = "ItemData", order = 2)]
 public class ItemData : EntityData
 {
-    public MonoScript scr;
+    public MonoScript Script;
+    public int Sort;
 
 #if UNITY_EDITOR
     protected override void OnValidate()
@@ -49,7 +50,7 @@ public class ItemData : EntityData
                 var cls = ms != null ? ms.GetClass() : null;
                 if (cls != null && typeof(Item).IsAssignableFrom(cls) && cls.Name == Name)
                 {
-                    scr = ms;
+                    Script = ms;
                     break;
                 }
             }
@@ -66,6 +67,8 @@ public class ItemData : EntityData
         clone.ID = this.ID;
         clone.Name = this.Name;
         clone.Image = this.Image;
+        clone.Script = this.Script;
+        clone.Sort = this.Sort;
         return clone;
     }
 }

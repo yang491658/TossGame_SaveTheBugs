@@ -92,8 +92,6 @@ public class EntityManager : MonoBehaviour
 
     public Item SpawnItem(int _id = 0, Vector3? _pos = null)
     {
-        //if (items.Count >= 5) return null;
-
         ItemData data = (_id == 0)
             ? itemDatas[Random.Range(0, itemDatas.Length)]
             : SearchItem(_id);
@@ -104,10 +102,10 @@ public class EntityManager : MonoBehaviour
         var go = Instantiate(itemBase, pos, Quaternion.identity, itemTrans);
 
         System.Type t = null;
-        if (data.scr != null) t = data.scr.GetClass();
+        if (data.Script != null) t = data.Script.GetClass();
         Item i = t != null ? (Item)go.AddComponent(t) : go.AddComponent<Item>();
 
-        i.SetData((EntityData)data.Clone());
+        i.SetData(data.Clone());
         items.Add(i);
 
         return i;

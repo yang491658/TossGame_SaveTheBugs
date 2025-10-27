@@ -7,14 +7,14 @@ public class Item : Entity
     private float speed = 5f;
 
     private float timer = 0f;
-    private float delay = 1.5f; // TODO 아이템 테스트
+    private float delay = 15f;
     private Collider2D backCol;
 
     protected override void Awake()
     {
         base.Awake();
 
-        backCol = transform.Find("Background").GetComponent<Collider2D>();
+        backCol = transform.Find("Background")?.GetComponent<Collider2D>();
     }
 
     protected override void Start()
@@ -56,9 +56,9 @@ public class Item : Entity
 
         Debug.Log(gameObject.name + " 발동");
 
-        sr.sortingOrder = -1;
+        sr.sortingOrder = ((ItemData)data).Sort;
         col.isTrigger = true;
         isActive = true;
-        Destroy(backCol.gameObject);
+        if (backCol != null) Destroy(backCol.gameObject);
     }
 }

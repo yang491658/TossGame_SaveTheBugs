@@ -2,9 +2,14 @@ using UnityEngine;
 
 public class Barrier : Item
 {
-    private float spin = 120f;
-    private float duration = 10f;
+    #region 스케일
     private float scale = 2.5f;
+    private float spin = 120f;
+    #endregion
+
+    #region 능력
+    private float duration = 10f;
+    #endregion
 
     protected override void Update()
     {
@@ -17,7 +22,6 @@ public class Barrier : Item
     public override void UseItem()
     {
         if (isActive) return;
-
         base.UseItem();
 
         Stop();

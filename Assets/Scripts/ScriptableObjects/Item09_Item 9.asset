@@ -15,4 +15,5 @@ MonoBehaviour:
   ID: 9
   Name: Item 9
   Image: {fileID: 21300000, guid: d372d81d5deb7564ead8162db7bc6017, type: 3}
-  scr: {fileID: 0}
+  Script: {fileID: 0}
+  Sort: 0

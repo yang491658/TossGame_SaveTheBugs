@@ -103,7 +103,12 @@ public class HandleManager : MonoBehaviour
     private bool IsOverUI(int _fingerID = -1)
         => EventSystem.current != null && EventSystem.current.IsPointerOverGameObject(_fingerID);
 
-    private Vector3 ScreenToWorld(Vector3 _screenPos) => cam.ScreenToWorldPoint(_screenPos);
+    private Vector3 ScreenToWorld(Vector3 _screenPos)
+    {
+        var p = _screenPos;
+        p.z = -cam.transform.position.z;
+        return cam.ScreenToWorldPoint(p);
+    }
 
     private bool CanSelect(Collider2D _col) => layer == 0 || _col != null;
 

@@ -3,12 +3,14 @@ using System.Collections;
 
 public class Homing : Item
 {
-    private float spin = 180f;
-    private float duration = 3.5f;
+    #region 스케일
     private float scale = 3f;
+    private float spin = 180f;
+    #endregion
 
+    #region 능력
     private bool isOrigin = true;
-    private int amount = 3;
+    private int count = 3;
     private float angle = 90f;
 
     private bool isMoving = true;
@@ -16,10 +18,11 @@ public class Homing : Item
     private Vector3 direction = Vector3.up;
     private Vector3 basePos;
     private float minDistance = 5f;
+    private float duration = 3.5f;
 
     private bool isHoming = false;
     private Enemy target;
-
+    #endregion
     protected override void Update()
     {
         base.Update();
@@ -48,25 +51,24 @@ public class Homing : Item
     public override void UseItem()
     {
         if (isActive) return;
+        base.UseItem();
 
         basePos = transform.position;
 
-        base.UseItem();
-
         if (isOrigin)
         {
-            int count = amount - 1;
+            int cloneCount = count - 1;
             float start = -angle * 0.5f;
-            float step = count <= 0 ? 0f : angle / (amount - 1);
+            float step = cloneCount <= 0 ? 0f : angle / (count - 1);
 
             direction = SetRotate(direction, start);
 
-            for (int i = 1; i <= count; i++)
+            for (int i = 1; i <= cloneCount; i++)
             {
                 float deg = start + step * i;
                 Vector3 dir = SetRotate(direction, deg - start);
 
-                Homing clone = Instantiate(gameObject, transform.position, Quaternion.identity, transform.parent)
+                Homing clone = EntityManager.Instance.SpawnItem(data.ID, transform.position)
                     .GetComponent<Homing>();
 
                 clone.SetClone();

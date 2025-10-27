@@ -10,9 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4a41f9786e10cc74c89c54711f4abb29, type: 3}
-  m_Name: Item04_Item 4
+  m_Name: Item05_Bullet
   m_EditorClassIdentifier: 
-  ID: 4
-  Name: Item 4
-  Image: {fileID: 21300000, guid: 40051a2831e39e14cb0b410caf6a6040, type: 3}
-  scr: {fileID: 0}
+  ID: 5
+  Name: Bullet
+  Image: {fileID: 21300000, guid: c85870a18f540a14d8a0e68014e96868, type: 3}
+  Script: {fileID: 0}
+  Sort: 0
