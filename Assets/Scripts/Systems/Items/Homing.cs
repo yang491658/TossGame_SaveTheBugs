@@ -10,19 +10,19 @@ public class Homing : Item
 
     #region ´É·Â
     private Player player;
+    private Enemy target;
+
     private bool isOrigin = true;
+    private bool isMoving = true;
+    private bool isHoming = false;
+
     private int count = 3;
     private float angle = 90f;
-
-    private bool isMoving = true;
     private float speed = 10f;
     private Vector3 direction = Vector3.up;
     private Vector3 basePos;
     private float distance = 5f;
     private float duration = 3.5f;
-
-    private bool isHoming = false;
-    private Enemy target;
     #endregion
 
     protected override void Update()

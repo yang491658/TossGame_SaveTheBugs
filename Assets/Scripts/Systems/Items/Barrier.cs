@@ -9,6 +9,7 @@ public class Barrier : Item
 
     #region ´É·Â
     private Player player;
+
     private float duration = 10f;
     #endregion
 

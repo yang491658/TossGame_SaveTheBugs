@@ -4,20 +4,22 @@ using System.Collections;
 public class Bullet : Item
 {
     #region 스케일
-    private float scale = 0.8f;
+    private float scale = 0.5f;
     #endregion
+
     #region 능력
     private Player player;
     private bool isOrigin = true;
-    private int count = 5;
-    private float speed = 10f;
+    private int count = 10;
+    private float ratio = 3f;
+    private Vector2 speed = new Vector2(1f, 10f);
     private Vector3 direction = Vector3.up;
     private float delay = 0.3f;
     #endregion
 
     private void LateUpdate()
     {
-        if (isActive && player != null)
+        if (isActive && isOrigin && player != null)
             transform.position = player.transform.position;
     }
 
@@ -32,6 +34,7 @@ public class Bullet : Item
 
         if (isOrigin)
         {
+            transform.position = player.transform.position;
             sr.color = new Color(1f, 1f, 1f, 0f);
 
             StartCoroutine(FireCoroutine());
@@ -62,7 +65,8 @@ public class Bullet : Item
         EntityManager.Instance?.RemoveItem(this);
     }
 
-    private void Fire() => Move(direction * speed);
+    private void Fire()
+    => Move(direction * Mathf.Clamp(player.GetSpeed() * ratio, speed.x, speed.y));
 
     #region SET
     public void SetClone() => isOrigin = false;
