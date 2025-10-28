@@ -51,14 +51,18 @@ public class Bullet : Item
     {
         while (count > 0)
         {
-            Bullet clone = EntityManager.Instance.SpawnItem(data.ID, player.transform.position)
-                .GetComponent<Bullet>();
+            if (player.GetSpeed() > 0f)
+            {
 
-            clone.SetClone();
-            clone.SetDirection(player.transform.up);
-            clone.UseItem();
+                Bullet clone = EntityManager.Instance.SpawnItem(data.ID, player.transform.position)
+                    .GetComponent<Bullet>();
 
-            count--;
+                clone.SetClone();
+                clone.SetDirection(player.transform.up);
+                clone.UseItem();
+
+                count--;
+            }
             yield return new WaitForSeconds(delay);
         }
 

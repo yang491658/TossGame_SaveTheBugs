@@ -17,9 +17,28 @@ public class Player : Entity
     {
         base.Awake();
 
-        col.isTrigger = false;
-
         SetData(data);
+    }
+
+    protected override void Update()
+    {
+        base.Update();
+
+#if UNITY_EDITOR
+        float x = Input.GetAxis("Horizontal");
+        float y = Input.GetAxisRaw("Vertical");
+        Move(new Vector2(x, y).normalized * 5f);
+#endif
+    }
+
+    private void OnTriggerStay2D(Collider2D _collision)
+    {
+        if (_collision.CompareTag("Background"))
+        {
+            ColliderDistance2D d = col.Distance(_collision);
+            if (d.isOverlapped)
+                rb.position += d.normal * d.distance;
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D _collision)

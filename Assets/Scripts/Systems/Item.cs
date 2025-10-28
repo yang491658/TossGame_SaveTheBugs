@@ -23,9 +23,7 @@ public class Item : Entity
 
         if (!isActive)
         {
-            float angle = Random.Range(0f, 360f);
-            float rad = angle * Mathf.Deg2Rad;
-            Vector3 dir = new Vector3(Mathf.Cos(rad), Mathf.Sin(rad)).normalized;
+            Vector3 dir = (Random.insideUnitCircle).normalized;
             Move(dir * speed);
         }
     }

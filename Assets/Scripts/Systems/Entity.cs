@@ -14,8 +14,6 @@ public class Entity : MonoBehaviour
         sr = GetComponent<SpriteRenderer>();
         col = GetComponent<Collider2D>();
         rb = GetComponent<Rigidbody2D>();
-
-        col.isTrigger = true;
     }
 
     protected virtual void Start() { }

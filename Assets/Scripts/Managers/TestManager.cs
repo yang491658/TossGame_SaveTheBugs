@@ -16,6 +16,9 @@ public class TestManager : MonoBehaviour
     [Header("Sound Test")]
     [SerializeField] private bool bgmPause = false;
 
+    [Header("Entiy Test")]
+    [SerializeField] private bool spawn = true;
+
     private void Awake()
     {
         if (Instance != null && Instance != this)
@@ -37,18 +40,21 @@ public class TestManager : MonoBehaviour
         #region 게임 테스트
         if (Input.GetKeyDown(KeyCode.P))
             GameManager.Instance?.Pause(!GameManager.Instance.IsPaused);
+        if (Input.GetKeyDown(KeyCode.O))
+            GameManager.Instance?.GameOver();
+
+        if (Input.GetKeyDown(KeyCode.T))
+        {
+            isAutoReplay = !isAutoReplay;
+            AutoPlay();
+        }
+        if (isAutoReplay && GameManager.Instance.IsGameOver && playRoutine == null)
+            playRoutine = StartCoroutine(AutoReplay());
+
         if (Input.GetKeyDown(KeyCode.R))
             GameManager.Instance?.Replay();
         if (Input.GetKeyDown(KeyCode.Q))
             GameManager.Instance?.Quit();
-        if (Input.GetKeyDown(KeyCode.G))
-            GameManager.Instance?.GameOver();
-
-        if (Input.GetKeyDown(KeyCode.O))
-            isAutoReplay = !isAutoReplay;
-
-        if (isAutoReplay && GameManager.Instance.IsGameOver && playRoutine == null)
-            playRoutine = StartCoroutine(AutoReplay());
         #endregion
 
         #region 사운드 테스트
@@ -70,18 +76,17 @@ public class TestManager : MonoBehaviour
             if (Input.GetKeyDown(key))
             {
                 Vector3 p = EntityManager.Instance.GetPlayer().transform.position;
-                EntityManager.Instance?.SpawnItem(i,p);
+                EntityManager.Instance?.SpawnItem(i, p);
                 break;
             }
         }
 
-        if (Input.GetKeyDown(KeyCode.A)) EntityManager.Instance?.ToggleSpawn(true);
-        if (Input.GetKeyDown(KeyCode.S)) EntityManager.Instance?.ToggleSpawn(false);
-        if (Input.GetKeyDown(KeyCode.D)) EntityManager.Instance?.RemoveAll();
-        #endregion
-
-        #region 액트 테스트
-        if (Input.GetKeyDown(KeyCode.T)) AutoPlay();
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            spawn = !spawn;
+            EntityManager.Instance?.ToggleSpawn(spawn);
+        }
+        if (Input.GetKeyDown(KeyCode.Delete)) EntityManager.Instance?.RemoveAll();
         #endregion
 
         #region UI 테스트

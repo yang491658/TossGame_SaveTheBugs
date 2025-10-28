@@ -71,7 +71,7 @@ public class SoundManager : MonoBehaviour
     }
 
     public void Pause(bool _on) => AudioListener.pause = _on;
-    public void Pause(string _on) => AudioListener.pause = _on == "true";
+    public void Pause(string _on) => AudioListener.pause = (_on == "true");
 
     #region 배경음
     public void PlayBGM(AudioClip _clip)
@@ -155,7 +155,7 @@ public class SoundManager : MonoBehaviour
         SetDictionaries();
     }
 
-    public void SetBGMVolume(float _volume = 1)
+    public void SetBGMVolume(float _volume = 1f)
     {
         bgmVol = Mathf.Clamp01(_volume);
         bgmSource.volume = bgmVol;
@@ -166,7 +166,7 @@ public class SoundManager : MonoBehaviour
         OnChangeVolume?.Invoke(SoundType.BGM, bgmVol);
     }
 
-    public void SetSFXVolume(float _volume = 1)
+    public void SetSFXVolume(float _volume = 1f)
     {
         sfxVol = Mathf.Clamp01(_volume);
         sfxSource.volume = sfxVol;

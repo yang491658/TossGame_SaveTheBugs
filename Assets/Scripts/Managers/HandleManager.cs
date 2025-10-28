@@ -8,7 +8,6 @@ public class HandleManager : MonoBehaviour
     public static HandleManager Instance { private set; get; }
 
     private Camera cam => Camera.main;
-    private LayerMask layer = ~0;
     private float time;
 
     [Header("Entity")]

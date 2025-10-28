@@ -48,7 +48,6 @@ public class AutoBackground : MonoBehaviour
     {
         Fit();
     }
-
     private void Fit()
     {
         if (cam == null || !cam.orthographic || sr.sprite == null) return;
@@ -82,6 +81,10 @@ public class AutoBackground : MonoBehaviour
         Vector3 camCenter = cam.transform.position;
         Vector3 delta = new Vector3(camCenter.x - b.center.x, camCenter.y - b.center.y, 0f);
         transform.position += delta;
+
+        scroll = sr.bounds.size.y;
+        if (clone != null)
+            clone.position = img.position + Vector3.up * scroll;
     }
 
     private void Scroll()
@@ -91,7 +94,7 @@ public class AutoBackground : MonoBehaviour
         if (clone == null)
         {
             clone = Instantiate(img.gameObject, transform).transform;
-            scroll = sr.bounds.size.y;
+            scroll = sr.bounds.size.y; 
             clone.position = img.position + Vector3.up * scroll;
         }
 
