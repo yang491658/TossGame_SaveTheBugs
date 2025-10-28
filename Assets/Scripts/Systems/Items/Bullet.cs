@@ -4,15 +4,15 @@ using System.Collections;
 public class Bullet : Item
 {
     #region 스케일
-    private float scale = 0.5f;
+    private float scale = 0.8f;
     #endregion
 
     #region 능력
     private Player player;
     private bool isOrigin = true;
     private int count = 10;
-    private float ratio = 3f;
-    private Vector2 speed = new Vector2(1f, 10f);
+    private float speedRatio = 3f;
+    private Vector2 speedRange = new Vector2(1f, 15f);
     private Vector3 direction = Vector3.up;
     private float delay = 0.3f;
     #endregion
@@ -51,18 +51,14 @@ public class Bullet : Item
     {
         while (count > 0)
         {
-            if (player.GetSpeed() > 0f)
-            {
+            Bullet clone = EntityManager.Instance.SpawnItem(data.ID, player.transform.position)
+                .GetComponent<Bullet>();
 
-                Bullet clone = EntityManager.Instance.SpawnItem(data.ID, player.transform.position)
-                    .GetComponent<Bullet>();
+            clone.SetClone();
+            clone.SetDirection(player.transform.up);
+            clone.UseItem();
 
-                clone.SetClone();
-                clone.SetDirection(player.transform.up);
-                clone.UseItem();
-
-                count--;
-            }
+            count--;
             yield return new WaitForSeconds(delay);
         }
 
@@ -70,7 +66,7 @@ public class Bullet : Item
     }
 
     private void Fire()
-    => Move(direction * Mathf.Clamp(player.GetSpeed() * ratio, speed.x, speed.y));
+    => Move(direction * Mathf.Clamp(player.GetSpeed() * speedRatio, speedRange.x, speedRange.y));
 
     #region SET
     public void SetClone() => isOrigin = false;
