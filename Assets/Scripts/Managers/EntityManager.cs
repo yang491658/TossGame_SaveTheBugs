@@ -13,8 +13,6 @@ public class EntityManager : MonoBehaviour
 
     private enum SpawnKind { Enemy, Item }
 
-    private Camera cam;
-
     [Header("Data Setting")]
     [SerializeField] private GameObject enemyBase;
     [SerializeField] private GameObject itemBase;
@@ -119,11 +117,10 @@ public class EntityManager : MonoBehaviour
     {
         if (_pos.HasValue) return _pos.Value;
 
-        float h = cam.orthographicSize, w = h * cam.aspect;
-        Vector3 c = cam.transform.position;
+        Rect r = AutoCamera.WorldRect;
 
-        float minX = c.x - w, maxX = c.x + w;
-        float minY = c.y - h, maxY = c.y + h, midY = c.y;
+        float minX = r.xMin, maxX = r.xMax;
+        float minY = r.yMin, maxY = r.yMax, midY = r.center.y;
 
         bool enemy = _kind == SpawnKind.Enemy;
         int edge = Random.Range(0, enemy ? 3 : 4);
@@ -197,7 +194,6 @@ public class EntityManager : MonoBehaviour
         if (_enemy == null) return;
 
         enemies.Remove(_enemy);
-
         Destroy(_enemy.gameObject);
     }
 
@@ -205,9 +201,22 @@ public class EntityManager : MonoBehaviour
     {
         if (_item == null) return;
 
-        items.Remove(_item);
+        if (_duration <= 0f)
+        {
+            items.Remove(_item);
+            Destroy(_item.gameObject);
+            return;
+        }
 
-        Destroy(_item.gameObject, _duration);
+        _item.StartCoroutine(RemoveCoroutine(_item, _duration));
+    }
+
+    private static IEnumerator RemoveCoroutine(Item _item, float _duration)
+    {
+        yield return new WaitForSeconds(_duration);
+
+        Instance?.items.Remove(_item);
+        if (_item != null) Destroy(_item.gameObject);
     }
 
     public void RemoveAll()
@@ -227,8 +236,6 @@ public class EntityManager : MonoBehaviour
         if (player == null) player = GameObject.Find("InGame/Player")?.transform;
         if (enemyTrans == null) enemyTrans = GameObject.Find("InGame/Enemies")?.transform;
         if (itemTrans == null) itemTrans = GameObject.Find("InGame/Items")?.transform;
-
-        cam = Camera.main;
     }
     #endregion
 

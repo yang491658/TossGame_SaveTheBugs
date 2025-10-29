@@ -1297,8 +1297,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 0}
   maxDrag: 5
-  ring: {fileID: 1019678744}
-  handle: {fileID: 1070203467}
+  ring: {fileID: 0}
+  handle: {fileID: 0}
   aimVisible: 0
   markDuration: 1
   markRadius: 0.5
@@ -1485,26 +1485,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c4f4d91872bc35d4eac4704e3f89e2cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inGameUI: {fileID: 463422171}
-  scoreText: {fileID: 1222573071}
-  playTimeText: {fileID: 1898468089}
-  settingUI: {fileID: 565046922}
-  settingScoreText: {fileID: 79075885}
-  bgmSlider: {fileID: 1367106577}
-  sfxSlider: {fileID: 892183346}
-  bgmIcon: {fileID: 185723935}
-  sfxIcon: {fileID: 1928568704}
-  bgmIcons:
-  - {fileID: 21300000, guid: 06a16cb520d0f2449a999572cae2cf97, type: 3}
-  - {fileID: 21300000, guid: cabad5b87dec1fd4e8749fa9f8936e63, type: 3}
-  sfxIcons:
-  - {fileID: 21300000, guid: fd30afab859581246b9ba7593ee3c10c, type: 3}
-  - {fileID: 21300000, guid: 2896697aee29fec4eae8809b364feeb0, type: 3}
-  - {fileID: 21300000, guid: d7f4f52e0d03f214b8b9ff47d92ab909, type: 3}
-  confirmUI: {fileID: 1922433877}
-  confirmText: {fileID: 137781734}
-  resultUI: {fileID: 578179199}
-  resultScoreText: {fileID: 180508595}
+  inGameUI: {fileID: 0}
+  scoreText: {fileID: 0}
+  playTimeText: {fileID: 0}
+  settingUI: {fileID: 0}
+  settingScoreText: {fileID: 0}
+  bgmSlider: {fileID: 0}
+  sfxSlider: {fileID: 0}
+  bgmIcon: {fileID: 0}
+  sfxIcon: {fileID: 0}
+  bgmIcons: []
+  sfxIcons: []
+  confirmUI: {fileID: 0}
+  confirmText: {fileID: 0}
+  resultUI: {fileID: 0}
+  resultScoreText: {fileID: 0}
 --- !u!4 &264004223
 Transform:
   m_ObjectHideFlags: 0
@@ -2335,7 +2330,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.3183594, y: 1.7045455, z: 1}
+  m_LocalScale: {x: 1.7578125, y: 1.7045455, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 524469655}
@@ -2358,7 +2353,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 0.5
-  img: {fileID: 524469655}
+  img: {fileID: 0}
   clone: {fileID: 0}
 --- !u!1 &757946994
 GameObject:
@@ -3400,7 +3395,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d9024cef7d3b014b857e148723f9b28, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  res: {x: 1080, y: 1920}
 --- !u!114 &1092585285
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5419,12 +5413,8 @@ MonoBehaviour:
   bgmVol: 1
   sfxVol: 1
   soundClips:
-    bgmClips:
-    - {fileID: 8300000, guid: d76ecd11a0b575847ba2a1c53dea9f05, type: 3}
-    - {fileID: 8300000, guid: 49731314153f00046b85f50fdc038198, type: 3}
-    sfxClips:
-    - {fileID: 8300000, guid: 2bd74fec26584e646adfcee5d63449bd, type: 3}
-    - {fileID: 8300000, guid: ceebd236cb9506b488ca55c45d0c9580, type: 3}
+    bgmClips: []
+    sfxClips: []
 --- !u!4 &1640530186
 Transform:
   m_ObjectHideFlags: 0
@@ -6958,19 +6948,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8757234db11563c478a55d79795ecf2f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyBase: {fileID: 350016272964680081, guid: a6fe9cbba711a194a954b4585f725966, type: 3}
-  itemBase: {fileID: 350016272964680081, guid: c76fbda9a388a614fa410949fae9715f, type: 3}
-  itemDatas:
-  - {fileID: 11400000, guid: b16054db90cb9964d8c087506e9c1e8e, type: 2}
-  - {fileID: 11400000, guid: b5bd9d683e8771b4499758ba02559369, type: 2}
-  - {fileID: 11400000, guid: b77b86f1d1394944097a90fa34d5fdda, type: 2}
-  - {fileID: 11400000, guid: d718d40f0b757f74595f29de7671c8b6, type: 2}
-  - {fileID: 11400000, guid: 77c4f385dce580144bd027ef356dee8b, type: 2}
-  - {fileID: 11400000, guid: 61588844772380e43adc9f922cd048a2, type: 2}
-  - {fileID: 11400000, guid: f633011b01e485b418f0407c17c6930f, type: 2}
-  - {fileID: 11400000, guid: a9b2a540e2adca54f80270c6e30a2189, type: 2}
-  - {fileID: 11400000, guid: be27ae07327cd9e4fbc3e0346eabd0b9, type: 2}
-  - {fileID: 11400000, guid: a33f324f63b4bca4f8833c9e07c4cc75, type: 2}
+  enemyBase: {fileID: 0}
+  itemBase: {fileID: 0}
+  itemDatas: []
   eDelay: 5
   iDelay: 10
   inGame: {fileID: 0}

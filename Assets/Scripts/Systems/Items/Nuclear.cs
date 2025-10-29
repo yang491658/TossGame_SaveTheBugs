@@ -10,6 +10,7 @@ public class Nuclear : Item
     #region ´É·Â
     private bool isOrigin = true;
     private int count = 3;
+    private float gap = 1.5f;
     private float speed = 10f;
     #endregion
 
@@ -38,9 +39,14 @@ public class Nuclear : Item
 
     private void MakeClone()
     {
+        Vector3 c = new Vector3(AutoCamera.WorldRect.center.x, AutoCamera.WorldRect.yMin, 0f);
+
         for (int i = 0; i < count; i++)
         {
-            Nuclear clone = EntityManager.Instance.SpawnItem(data.ID)
+            int k = i == 0 ? 0 : ((i % 2 == 1) ? (i + 1) / 2 : -i / 2);
+            Vector3 pos = new Vector3(c.x + gap * k, c.y, 0f);
+
+            Nuclear clone = EntityManager.Instance.SpawnItem(data.ID, pos)
                 .GetComponent<Nuclear>();
 
             clone.SetClone();

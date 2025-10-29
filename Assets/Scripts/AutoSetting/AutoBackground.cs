@@ -5,7 +5,6 @@ public class AutoBackground : MonoBehaviour
 {
     private Camera cam;
     private SpriteRenderer sr;
-
     private int lastW, lastH;
     private float lastAspect, lastOrthoSize;
 
@@ -46,6 +45,7 @@ public class AutoBackground : MonoBehaviour
     {
         Fit();
     }
+
     private void Fit()
     {
         if (cam == null || !cam.orthographic || sr.sprite == null) return;
@@ -59,8 +59,8 @@ public class AutoBackground : MonoBehaviour
         float ppu = sp.pixelsPerUnit;
         if (ppu <= 0f) return;
 
-        float worldH = cam.orthographicSize * 2f;
-        float worldW = worldH * cam.aspect;
+        float worldW = AutoCamera.WorldRect.width;
+        float worldH = AutoCamera.WorldRect.height;
 
         float spriteW = sp.rect.width / ppu;
         float spriteH = sp.rect.height / ppu;
@@ -76,7 +76,7 @@ public class AutoBackground : MonoBehaviour
         transform.localScale = new Vector3(localX, localY, transform.localScale.z);
 
         var b = sr.bounds;
-        Vector3 camCenter = cam.transform.position;
+        Vector3 camCenter = new Vector3(AutoCamera.WorldRect.center.x, AutoCamera.WorldRect.center.y, cam.transform.position.z);
         Vector3 delta = new Vector3(camCenter.x - b.center.x, camCenter.y - b.center.y, 0f);
         transform.position += delta;
 
@@ -92,7 +92,7 @@ public class AutoBackground : MonoBehaviour
         if (clone == null)
         {
             clone = Instantiate(img.gameObject, transform).transform;
-            scroll = sr.bounds.size.y; 
+            scroll = sr.bounds.size.y;
             clone.position = img.position + Vector3.up * scroll;
         }
 
