@@ -1,12 +1,12 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 
 public class Missile : Item
 {
-    #region ½ºÄÉÀÏ
+    #region ìŠ¤ì¼€ì¼
     private float scale = 3f;
     #endregion
 
-    #region ´É·Â
+    #region ëŠ¥ë ¥
     private float speed = 10f;
     #endregion
 

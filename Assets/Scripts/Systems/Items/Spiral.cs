@@ -1,13 +1,13 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 using System.Collections;
 
 public class Spiral : Item
 {
-    #region ½ºÄÉÀÏ
+    #region ìŠ¤ì¼€ì¼
     private float scale = 0.8f;
     #endregion
 
-    #region ´É·Â
+    #region ëŠ¥ë ¥
     private Player player;
 
     private bool isOrigin = true;

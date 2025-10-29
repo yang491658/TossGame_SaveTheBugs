@@ -1,13 +1,13 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 
 public class Bounce : Item
 {
-    #region ½ºÄÉÀÏ
+    #region ìŠ¤ì¼€ì¼
     private float scale = 3f;
     private float spin = 30f;
     #endregion
 
-    #region ´É·Â
+    #region ëŠ¥ë ¥
     private Player player;
 
     private float speedRatio = 5f;

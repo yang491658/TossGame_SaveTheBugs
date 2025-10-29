@@ -1,14 +1,14 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 using System.Collections;
 
 public class Homing : Item
 {
-    #region ½ºÄÉÀÏ
+    #region ìŠ¤ì¼€ì¼
     private float scale = 2.5f;
     private float spin = 360f;
     #endregion
 
-    #region ´É·Â
+    #region ëŠ¥ë ¥
     private Player player;
     private Enemy target;
 

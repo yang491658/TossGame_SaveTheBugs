@@ -1,13 +1,13 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 
 public class Bomb : Item
 {
-    #region ½ºÄÉÀÏ
+    #region ìŠ¤ì¼€ì¼
     private float scale = 3.5f;
     private float spin = 30f;
     #endregion
 
-    #region ´É·Â
+    #region ëŠ¥ë ¥
     private float duration = 10f;
     #endregion
 

@@ -1,13 +1,13 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 
 public class Barrier : Item
 {
-    #region ½ºÄÉÀÏ
+    #region ìŠ¤ì¼€ì¼
     private float scale = 2f;
     private float spin = 120f;
     #endregion
 
-    #region ´É·Â
+    #region ëŠ¥ë ¥
     private Player player;
 
     private float duration = 10f;
