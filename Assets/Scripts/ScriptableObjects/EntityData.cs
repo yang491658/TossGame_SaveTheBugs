@@ -1,5 +1,5 @@
-﻿using UnityEngine;
-using System.Text.RegularExpressions;
+﻿using System.Text.RegularExpressions;
+using UnityEngine;
 
 [CreateAssetMenu(fileName = "Entity", menuName = "EntityData", order = 1)]
 public class EntityData : ScriptableObject
