@@ -29,22 +29,17 @@ public class Spiral : Item
         if (isActive) return;
         base.UseItem();
 
-        Stop();
-
         player = EntityManager.Instance?.GetPlayer();
 
         if (isOrigin)
         {
             transform.position = player.transform.position;
             sr.color = new Color(1f, 1f, 1f, 0f);
-
-
             StartCoroutine(MakeClone());
         }
         else
         {
             transform.localScale *= scale;
-
             Fire();
         }
     }
@@ -52,11 +47,10 @@ public class Spiral : Item
     private IEnumerator MakeClone()
     {
         Vector3 baseDir = player.transform.up;
-        float currentAngle = 0f;
 
-        while (count > 0)
+        for (int i = 0; i < count; i++)
         {
-            Vector3 dir = Quaternion.Euler(0f, 0f, currentAngle) * baseDir;
+            Vector3 dir = Quaternion.Euler(0f, 0f, angle * i) * baseDir;
 
             Spiral clone = EntityManager.Instance.SpawnItem(data.ID, player.transform.position)
                 .GetComponent<Spiral>();
@@ -65,8 +59,6 @@ public class Spiral : Item
             clone.SetDirection(dir);
             clone.UseItem();
 
-            currentAngle += angle;
-            count--;
             yield return new WaitForSeconds(delay);
         }
 
@@ -77,7 +69,6 @@ public class Spiral : Item
 
     #region SET
     public void SetClone() => isOrigin = false;
-
     public void SetDirection(Vector3 _dir)
     {
         transform.up = _dir;

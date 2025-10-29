@@ -14,8 +14,7 @@ public class Bounce : Item
     private float minSpeed = 5f;
     private Vector3 direction = Vector3.up;
 
-    private float timer;
-    private float duration = 20f;
+    private float duration = 15f;
     private int bounce = 5;
     #endregion
 
@@ -24,12 +23,7 @@ public class Bounce : Item
         base.Update();
 
         if (isActive)
-        {
-            timer += Time.deltaTime;
-            if (timer >= duration) bounce = 0;
-
             transform.Rotate(0f, 0f, spin * rb.linearVelocity.magnitude * Time.deltaTime);
-        }
     }
 
     private void OnTriggerEnter2D(Collider2D _collision)
@@ -51,14 +45,12 @@ public class Bounce : Item
         if (isActive) return;
         base.UseItem();
 
-        Stop();
-
         transform.localScale *= scale;
         player = EntityManager.Instance?.GetPlayer();
-        timer = 0f;
 
         SetDirection(player.transform.up);
         Fire();
+        EntityManager.Instance?.RemoveItem(this, duration);
     }
 
     private void Fire()

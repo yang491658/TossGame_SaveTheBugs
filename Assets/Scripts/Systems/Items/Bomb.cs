@@ -24,10 +24,9 @@ public class Bomb : Item
         if (isActive) return;
         base.UseItem();
 
-        Stop();
-
         transform.localScale *= scale;
 
+        Stop();
         EntityManager.Instance?.RemoveItem(this, duration);
     }
 }

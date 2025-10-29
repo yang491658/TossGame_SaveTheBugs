@@ -20,6 +20,7 @@ public class Homing : Item
     private float angle = 90f;
     private float speed = 10f;
     private Vector3 direction = Vector3.up;
+
     private Vector3 basePos;
     private float distance = 5f;
     private float duration = 3.5f;
@@ -35,17 +36,16 @@ public class Homing : Item
 
     private void OnTriggerEnter2D(Collider2D _collision)
     {
-        if (_collision.CompareTag("Enemy") && isActive && isMoving)
+        if (_collision.CompareTag("Enemy") && isActive && !isOrigin && isMoving)
         {
             if ((transform.position - basePos).sqrMagnitude > (distance * distance))
             {
-                Stop();
-
                 transform.localScale *= scale;
                 sr.sortingOrder = 1;
                 spin *= scale;
                 isMoving = false;
 
+                Stop();
                 EntityManager.Instance?.RemoveItem(this, duration);
             }
         }
@@ -60,32 +60,36 @@ public class Homing : Item
 
         if (isOrigin)
         {
-            player = EntityManager.Instance?.GetPlayer();
-
-            int cloneCount = count - 1;
-            float start = -angle * 0.5f;
-            float step = cloneCount <= 0 ? 0f : angle / (count - 1);
-
-            SetDirection(SetRotate(direction, start));
-
-            for (int i = 1; i <= cloneCount; i++)
-            {
-                float deg = start + step * i;
-                Vector3 dir = SetRotate(direction, deg - start);
-
-                Homing clone = EntityManager.Instance.SpawnItem(data.ID, player.transform.position)
-                    .GetComponent<Homing>();
-
-                clone.SetClone();
-                clone.SetDirection(dir);
-                clone.UseItem();
-            }
+            MakeClone();
+            EntityManager.Instance?.RemoveItem(this);
         }
-
-        StartCoroutine(Chase());
+        else StartCoroutine(ChaseCoroutine());
     }
 
-    private IEnumerator Chase()
+    private void MakeClone()
+    {
+        player = EntityManager.Instance?.GetPlayer();
+
+        float start = -angle * 0.5f;
+        float step = (count - 1) > 0 ? angle / (count - 1) : 0f;
+        
+        SetDirection(SetRotate(direction, start));
+
+        for (int i = 0; i < count; i++)
+        {
+            float deg = start + step * i;
+            Vector3 dir = SetRotate(direction, deg - start);
+
+            Homing clone = EntityManager.Instance.SpawnItem(data.ID, player.transform.position)
+                .GetComponent<Homing>();
+
+            clone.SetClone();
+            clone.SetDirection(dir);
+            clone.UseItem();
+        }
+    }
+
+    private IEnumerator ChaseCoroutine()
     {
         while (isMoving)
         {
@@ -105,27 +109,28 @@ public class Homing : Item
             if (direction == Vector3.zero)
                 direction = Vector3.up;
 
-            Move(direction * speed);
+            Fire();
 
             yield return null;
         }
     }
 
+    private void Fire()
+        => Move(direction * speed);
+
     #region SET
     public void SetClone() => isOrigin = false;
-
-    public void SetDirection(Vector3 _dir)
-    {
-        transform.up = _dir;
-        direction = _dir;
-    }
-
-    private Vector3 SetRotate(Vector3 _dir, float _deg)
+    public Vector3 SetRotate(Vector3 _dir, float _deg)
     {
         float r = _deg * Mathf.Deg2Rad;
         float cs = Mathf.Cos(r);
         float sn = Mathf.Sin(r);
         return new Vector3(_dir.x * cs - _dir.y * sn, _dir.x * sn + _dir.y * cs, 0f).normalized;
+    }
+    public void SetDirection(Vector3 _dir)
+    {
+        transform.up = _dir;
+        direction = _dir;
     }
     #endregion
 }

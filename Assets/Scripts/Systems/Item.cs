@@ -56,6 +56,7 @@ public class Item : Entity
         sr.sortingOrder = ((ItemData)data).Sort;
         col.isTrigger = true;
         isActive = true;
+        
         if (backCol != null) Destroy(backCol.gameObject);
     }
 }

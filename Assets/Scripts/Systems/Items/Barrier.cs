@@ -32,12 +32,11 @@ public class Barrier : Item
         if (isActive) return;
         base.UseItem();
 
-        Stop();
-
         transform.localScale *= scale;
         rb.bodyType = RigidbodyType2D.Kinematic;
-
         player = EntityManager.Instance?.GetPlayer();
+
+        Stop();
         EntityManager.Instance?.RemoveItem(this, duration);
     }
 }

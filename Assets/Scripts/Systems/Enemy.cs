@@ -27,7 +27,6 @@ public class Enemy : Entity
         base.Start();
 
         var p = EntityManager.Instance?.GetPlayer();
-
         Vector3 dir = (p.transform.position - transform.position).normalized;
         Move(dir * speed);
     }

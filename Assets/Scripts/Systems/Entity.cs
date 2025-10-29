@@ -34,11 +34,8 @@ public class Entity : MonoBehaviour
     public void SetData(EntityData _data)
     {
         data = _data;
-
         gameObject.name = data.Name;
-
-        if (data.Image != null)
-            sr.sprite = data.Image;
+        if (data.Image != null) sr.sprite = data.Image;
     }
     #endregion
 }

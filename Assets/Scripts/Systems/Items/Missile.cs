@@ -15,8 +15,10 @@ public class Missile : Item
         if (isActive) return;
         base.UseItem();
 
-        Move(Vector3.up *speed);
-
         transform.localScale *= scale;
+        Fire();
     }
+
+    private void Fire()
+        => Move(Vector3.up * speed);
 }

@@ -29,28 +29,24 @@ public class Bullet : Item
         if (isActive) return;
         base.UseItem();
 
-        Stop();
-
         player = EntityManager.Instance?.GetPlayer();
 
         if (isOrigin)
         {
             transform.position = player.transform.position;
             sr.color = new Color(1f, 1f, 1f, 0f);
-
             StartCoroutine(MakeClone());
         }
         else
         {
             transform.localScale *= scale;
-
             Fire();
         }
     }
 
     private IEnumerator MakeClone()
     {
-        while (count > 0)
+        for (int i = 0; i < count; i++)
         {
             Bullet clone = EntityManager.Instance.SpawnItem(data.ID, player.transform.position)
                 .GetComponent<Bullet>();
@@ -59,7 +55,6 @@ public class Bullet : Item
             clone.SetDirection(player.transform.up);
             clone.UseItem();
 
-            count--;
             yield return new WaitForSeconds(delay);
         }
 
@@ -71,7 +66,6 @@ public class Bullet : Item
 
     #region SET
     public void SetClone() => isOrigin = false;
-
     public void SetDirection(Vector3 _dir)
     {
         transform.up = _dir;
