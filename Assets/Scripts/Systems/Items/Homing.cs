@@ -60,13 +60,13 @@ public class Homing : Item
 
         if (isOrigin)
         {
-            MakeClone();
+            CopySelf();
             EntityManager.Instance?.RemoveItem(this);
         }
         else StartCoroutine(ChaseCoroutine());
     }
 
-    private void MakeClone()
+    private void CopySelf()
     {
         player = EntityManager.Instance?.GetPlayer();
 
@@ -80,12 +80,12 @@ public class Homing : Item
             float deg = start + step * i;
             Vector3 dir = SetRotate(direction, deg - start);
 
-            Homing clone = EntityManager.Instance.SpawnItem(data.ID, player.transform.position)
+            Homing copy = EntityManager.Instance.SpawnItem(data.ID, player.transform.position)
                 .GetComponent<Homing>();
 
-            clone.SetClone();
-            clone.SetDirection(dir);
-            clone.UseItem();
+            copy.SetClone();
+            copy.SetDirection(dir);
+            copy.UseItem();
         }
     }
 

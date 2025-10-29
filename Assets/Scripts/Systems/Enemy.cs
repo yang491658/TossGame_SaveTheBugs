@@ -6,7 +6,7 @@ using UnityEditor;
 
 public class Enemy : Entity
 {
-   private float speed = 3f;
+    private float speed = 3f;
 
 #if UNITY_EDITOR
     private void OnValidate()
@@ -26,8 +26,12 @@ public class Enemy : Entity
     {
         base.Start();
 
-        var p = EntityManager.Instance?.GetPlayer();
-        Vector3 dir = (p.transform.position - transform.position).normalized;
+        Entity target = EntityManager.Instance?.GetClone();
+
+        if (target == null)
+            target = EntityManager.Instance?.GetPlayer();
+
+        Vector3 dir = (target.transform.position - transform.position).normalized;
         Move(dir * speed);
     }
 

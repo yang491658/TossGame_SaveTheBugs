@@ -45,13 +45,13 @@ public class Shield : Item
 
         if (isOrigin)
         {
-            MakeClone();
+            CopySelf();
             EntityManager.Instance?.RemoveItem(this);
         }
         else StartCoroutine(FireCoroutine());
     }
 
-    private void MakeClone()
+    private void CopySelf()
     {
         float diag = 2f;
         float ortho = 1.2f;
@@ -70,12 +70,12 @@ public class Shield : Item
 
         for (int i = 0; i < count; i++)
         {
-            Shield clone = EntityManager.Instance.SpawnItem(data.ID, player.transform.position + offs[i])
+            Shield copy = EntityManager.Instance.SpawnItem(data.ID, player.transform.position + offs[i])
                 .GetComponent<Shield>();
 
-            clone.SetClone();
-            clone.SetOffset(offs[i]);
-            clone.UseItem();
+            copy.SetClone();
+            copy.SetOffset(offs[i]);
+            copy.UseItem();
         }
     }
 

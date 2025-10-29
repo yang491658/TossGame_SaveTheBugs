@@ -1,0 +1,24 @@
+using UnityEngine;
+
+public class Clone : Item
+{
+    #region 스케일
+    private float scale = 1f;
+    #endregion
+
+    #region 능력
+    private float speed = 8f;
+    #endregion
+
+    public override void UseItem()
+    {
+        if (isActive) return;
+        base.UseItem();
+
+        transform.localScale *= scale;
+        Fire();
+    }
+
+    private void Fire()
+        => Move(Vector3.up * speed);
+}

@@ -61,14 +61,18 @@ public class ItemData : EntityData
     }
 #endif
 
-    public override EntityData Clone()
+    new public ItemData Clone()
     {
         var clone = CreateInstance<ItemData>();
+        
+        clone.name = this.Name;
+
         clone.ID = this.ID;
         clone.Name = this.Name;
         clone.Image = this.Image;
         clone.Script = this.Script;
         clone.Sort = this.Sort;
+        
         return clone;
     }
 }

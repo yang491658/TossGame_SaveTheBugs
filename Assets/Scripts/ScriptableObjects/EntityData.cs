@@ -20,12 +20,16 @@ public class EntityData : ScriptableObject
     }
 #endif
 
-    public virtual EntityData Clone()
+    public EntityData Clone()
     {
         EntityData clone = CreateInstance<EntityData>();
+
+        clone.name = this.Name;
+
         clone.ID = this.ID;
         clone.Name = this.Name;
         clone.Image = this.Image;
+
         return clone;
     }
 }

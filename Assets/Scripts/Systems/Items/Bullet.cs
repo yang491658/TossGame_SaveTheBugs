@@ -35,7 +35,7 @@ public class Bullet : Item
         {
             transform.position = player.transform.position;
             sr.color = new Color(1f, 1f, 1f, 0f);
-            StartCoroutine(MakeClone());
+            StartCoroutine(CopySelf());
         }
         else
         {
@@ -44,16 +44,16 @@ public class Bullet : Item
         }
     }
 
-    private IEnumerator MakeClone()
+    private IEnumerator CopySelf()
     {
         for (int i = 0; i < count; i++)
         {
-            Bullet clone = EntityManager.Instance.SpawnItem(data.ID, player.transform.position)
+            Bullet copy = EntityManager.Instance.SpawnItem(data.ID, player.transform.position)
                 .GetComponent<Bullet>();
 
-            clone.SetClone();
-            clone.SetDirection(player.transform.up);
-            clone.UseItem();
+            copy.SetClone();
+            copy.SetDirection(player.transform.up);
+            copy.UseItem();
 
             yield return new WaitForSeconds(delay);
         }

@@ -35,7 +35,7 @@ public class Spiral : Item
         {
             transform.position = player.transform.position;
             sr.color = new Color(1f, 1f, 1f, 0f);
-            StartCoroutine(MakeClone());
+            StartCoroutine(CopySelf());
         }
         else
         {
@@ -44,7 +44,7 @@ public class Spiral : Item
         }
     }
 
-    private IEnumerator MakeClone()
+    private IEnumerator CopySelf()
     {
         Vector3 baseDir = player.transform.up;
 
@@ -52,12 +52,12 @@ public class Spiral : Item
         {
             Vector3 dir = Quaternion.Euler(0f, 0f, angle * i) * baseDir;
 
-            Spiral clone = EntityManager.Instance.SpawnItem(data.ID, player.transform.position)
+            Spiral copy = EntityManager.Instance.SpawnItem(data.ID, player.transform.position)
                 .GetComponent<Spiral>();
 
-            clone.SetClone();
-            clone.SetDirection(dir);
-            clone.UseItem();
+            copy.SetClone();
+            copy.SetDirection(dir);
+            copy.UseItem();
 
             yield return new WaitForSeconds(delay);
         }

@@ -46,7 +46,7 @@ public class EntityManager : MonoBehaviour
         {
             string path = AssetDatabase.GUIDToAssetPath(guids[i]);
             var data = AssetDatabase.LoadAssetAtPath<ItemData>(path);
-            if (data != null) list.Add(data);
+            if (data != null) list.Add(data.Clone());
         }
         itemDatas = list.OrderBy(d => d.ID).ThenBy(d => d.Name).ToArray();
     }
@@ -241,6 +241,15 @@ public class EntityManager : MonoBehaviour
 
     #region GET
     public Player GetPlayer() => player.GetComponent<Player>();
+    public Item GetClone()
+    {
+        for (int i = 0; i < items.Count; i++)
+        {
+            if (items[i].GetComponent<Clone>() != null)
+                return items[i];
+        }
+        return null;
+    }
     public Enemy GetEnemyRandom()
     {
         if (enemies.Count == 0) return null;
