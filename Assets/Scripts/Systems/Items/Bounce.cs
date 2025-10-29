@@ -36,10 +36,10 @@ public class Bounce : Item
     {
         if (_collision.CompareTag("Background") && bounce > 0)
         {
-            var wall = _collision.gameObject.name.Replace("Wall_", "");
-            if (wall == "Top" || wall == "Bottom")
+            var wall = _collision.gameObject.name;
+            if (wall.EndsWith("Top") || wall.EndsWith("Bottom"))
                 rb.linearVelocityY *= -1;
-            else if (wall == "Left" || wall == "Right")
+            else if (wall.EndsWith("Left") || wall.EndsWith("Right"))
                 rb.linearVelocityX *= -1;
 
             bounce--;

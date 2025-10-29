@@ -13,7 +13,7 @@ public class Bullet : Item
     private bool isOrigin = true;
     private int count = 10;
     private float speedRatio = 3f;
-    private Vector2 speedRange = new Vector2(1f, 15f);
+    private float minSpeed = 1f;
     private Vector3 direction = Vector3.up;
     private float delay = 0.3f;
     #endregion
@@ -67,7 +67,7 @@ public class Bullet : Item
     }
 
     private void Fire()
-    => Move(direction * Mathf.Clamp(player.GetSpeed() * speedRatio, speedRange.x, speedRange.y));
+        => Move(direction * Mathf.Max(player.GetSpeed() * speedRatio, minSpeed));
 
     #region SET
     public void SetClone() => isOrigin = false;

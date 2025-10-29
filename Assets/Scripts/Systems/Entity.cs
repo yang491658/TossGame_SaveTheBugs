@@ -20,7 +20,7 @@ public class Entity : MonoBehaviour
 
     protected virtual void Update()
     {
-        Vector2 v = rb.linearVelocity;
+        Vector3 v = rb.linearVelocity;
         if (v.sqrMagnitude > 1e-4f)
             transform.up = v.normalized;
     }

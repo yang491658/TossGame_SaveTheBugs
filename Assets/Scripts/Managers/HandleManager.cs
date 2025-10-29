@@ -64,7 +64,7 @@ public class HandleManager : MonoBehaviour
 
     private void Update()
     {
-        //if (GameManager.Instance.IsPaused) return;
+        if (GameManager.Instance.IsPaused) return;
 
 #if UNITY_EDITOR
         HandleMouse();

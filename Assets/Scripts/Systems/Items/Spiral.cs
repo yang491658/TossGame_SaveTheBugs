@@ -11,7 +11,7 @@ public class Spiral : Item
     private Player player;
 
     private bool isOrigin = true;
-    private int count = 10;
+    private int count = 12;
     private float angle = 30f;
     private float speed = 8f;
     private Vector3 direction = Vector3.up;

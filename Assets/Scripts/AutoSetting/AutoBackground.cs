@@ -18,16 +18,14 @@ public class AutoBackground : MonoBehaviour
     private void OnValidate()
     {
         if (enabled) Fit();
-
-        if (img == null) img = transform.Find("Image");
     }
 #endif
 
     private void Awake()
     {
         cam = Camera.main;
-        sr = img.GetComponent<SpriteRenderer>();
-
+        sr = GetComponentInChildren<SpriteRenderer>();
+        img = sr.transform;
         Fit();
     }
 
