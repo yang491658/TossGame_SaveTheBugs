@@ -4,6 +4,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Entity", menuName = "EntityData", order = 1)]
 public class EntityData : ScriptableObject
 {
+    [Header("Entity")]
     public int ID;
     public string Name;
     public Sprite Image;

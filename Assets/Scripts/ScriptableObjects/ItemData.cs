@@ -8,6 +8,7 @@ using UnityEditor;
 [CreateAssetMenu(fileName = "Item", menuName = "ItemData", order = 2)]
 public class ItemData : EntityData
 {
+    [Header("Item")]
     public MonoScript Script;
     public int Sort;
 
