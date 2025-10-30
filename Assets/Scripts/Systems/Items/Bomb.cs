@@ -5,7 +5,7 @@ public class Bomb : Item
     #region 스케일
     [Header("Scale")]
     [SerializeField] private float scale = 3.5f;
-    [SerializeField] private float spin = 30f;
+    [SerializeField] private float spin = -30f;
     #endregion
 
     #region 능력

@@ -5,7 +5,7 @@ public class Bounce : Item
     #region 스케일
     [Header("Scale")]
     [SerializeField] private float scale = 3f;
-    [SerializeField] private float spin = 30f;
+    [SerializeField] private float spin = -30f;
     #endregion
 
     #region 능력

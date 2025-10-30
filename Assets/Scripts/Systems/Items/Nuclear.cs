@@ -5,7 +5,7 @@ public class Nuclear : Item
     #region 스케일
     [Header("Scale")]
     [SerializeField] private float scale = 1f;
-    [SerializeField] private float spin = 120f;
+    [SerializeField] private float spin = -120f;
     #endregion
 
     #region 능력
