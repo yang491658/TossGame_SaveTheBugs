@@ -4,20 +4,22 @@ using UnityEngine;
 public class Shield : Item
 {
     #region 스케일
-    private float scale = 1f;
-    private float spin = 120f;
+    [Header("Scale")]
+    [SerializeField] private float scale = 1f;
+    [SerializeField] private float spin = 120f;
     #endregion
 
     #region 능력
+    [Header("Ability")]
     private Player player;
 
     private bool isOrigin = true;
-    private int count = 3;
+    [SerializeField] private int count = 3;
     private Vector3 offset;
 
     private bool isFired = false;
-    private float duration = 5f;
-    private float speed = 10f;
+    [SerializeField] private float duration = 5f;
+    [SerializeField] private float speed = 10f;
     #endregion
 
     protected override void Update()

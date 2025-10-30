@@ -4,11 +4,13 @@ using UnityEngine;
 public class Homing : Item
 {
     #region 스케일
-    private float scale = 2.5f;
-    private float spin = 360f;
+    [Header("Scale")]
+    [SerializeField] private float scale = 2.5f;
+    [SerializeField] private float spin = 360f;
     #endregion
 
     #region 능력
+    [Header("Ability")]
     private Player player;
     private Enemy target;
 
@@ -16,14 +18,14 @@ public class Homing : Item
     private bool isMoving = true;
     private bool isHoming = false;
 
-    private int count = 3;
-    private float angle = 90f;
-    private float speed = 10f;
+    [SerializeField] private int count = 3;
+    [SerializeField] private float angle = 90f;
+    [SerializeField] private float speed = 10f;
     private Vector3 direction = Vector3.up;
 
     private Vector3 basePos;
-    private float distance = 5f;
-    private float duration = 3.5f;
+    [SerializeField] private float distance = 5f;
+    [SerializeField] private float duration = 3.5f;
     #endregion
 
     protected override void Update()
@@ -72,13 +74,13 @@ public class Homing : Item
 
         float start = -angle * 0.5f;
         float step = (count - 1) > 0 ? angle / (count - 1) : 0f;
-        
-        SetDirection(SetRotate(direction, start));
+
+        Vector3 baseDir = SetRotate(direction, start);
 
         for (int i = 0; i < count; i++)
         {
             float deg = start + step * i;
-            Vector3 dir = SetRotate(direction, deg - start);
+            Vector3 dir = SetRotate(baseDir, deg - start);
 
             Homing copy = EntityManager.Instance.SpawnItem(data.ID, player.transform.position)
                 .GetComponent<Homing>();

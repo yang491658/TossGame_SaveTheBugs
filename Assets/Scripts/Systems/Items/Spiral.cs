@@ -4,18 +4,20 @@ using UnityEngine;
 public class Spiral : Item
 {
     #region 스케일
-    private float scale = 0.8f;
+    [Header("Scale")]
+    [SerializeField] private float scale = 0.8f;
     #endregion
 
     #region 능력
+    [Header("Ability")]
     private Player player;
 
     private bool isOrigin = true;
-    private int count = 12;
-    private float angle = 30f;
-    private float speed = 8f;
+    [SerializeField] private int count = 12;
+    [SerializeField] private float angle = 30f;
+    [SerializeField] private float speed = 8f;
     private Vector3 direction = Vector3.up;
-    private float delay = 0.05f;
+    [SerializeField] private float delay = 0.05f;
     #endregion
 
     private void LateUpdate()

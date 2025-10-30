@@ -4,18 +4,20 @@ using UnityEngine;
 public class Bullet : Item
 {
     #region 스케일
-    private float scale = 0.8f;
+    [Header("Scale")]
+    [SerializeField] private float scale = 0.8f;
     #endregion
 
     #region 능력
+    [Header("Ability")]
     private Player player;
 
     private bool isOrigin = true;
-    private int count = 10;
-    private float speedRatio = 3f;
-    private float minSpeed = 1f;
+    [SerializeField] private int count = 10;
+    [SerializeField] private float speedRatio = 3f;
+    [SerializeField] private float minSpeed = 1f;
     private Vector3 direction = Vector3.up;
-    private float delay = 0.3f;
+    [SerializeField] private float delay = 0.3f;
     #endregion
 
     private void LateUpdate()

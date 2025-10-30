@@ -40,7 +40,7 @@ public class AutoCamera : MonoBehaviour
 
     private void Update()
     {
-        if (Screen.width != lastW || Screen.height != lastH) Apply(false);
+        Apply(false);
     }
 
     private void Apply(bool _force)

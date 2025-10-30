@@ -164,8 +164,8 @@ public class EntityManager : MonoBehaviour
             eTimer += dt;
             iTimer += dt;
 
-            eDelay = Mathf.Max(0.05f, eDelay - dt / 10f);
-            iDelay = Mathf.Max(3f, iDelay - dt / 7f);
+            eDelay = Mathf.Max(0.05f, eDelay - dt / 50f);
+            iDelay = Mathf.Max(3f, iDelay - dt / 35f);
 
             int cnt = 0;
             while (eTimer >= eDelay && cnt++ < 4)
@@ -180,6 +180,7 @@ public class EntityManager : MonoBehaviour
             while (iTimer >= iDelay && cnt++ < 4)
             {
                 SpawnItem();
+                yield return new WaitForSeconds(0.01f);
                 iTimer -= iDelay;
             }
 

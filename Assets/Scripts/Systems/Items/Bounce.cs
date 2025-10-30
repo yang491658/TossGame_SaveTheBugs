@@ -3,19 +3,21 @@
 public class Bounce : Item
 {
     #region 스케일
-    private float scale = 3f;
-    private float spin = 30f;
+    [Header("Scale")]
+    [SerializeField] private float scale = 3f;
+    [SerializeField] private float spin = 30f;
     #endregion
 
     #region 능력
+    [Header("Ability")]
     private Player player;
 
-    private float speedRatio = 5f;
-    private float minSpeed = 5f;
+    [SerializeField] private float speedRatio = 5f;
+    [SerializeField] private float minSpeed = 5f;
     private Vector3 direction = Vector3.up;
 
-    private float duration = 15f;
-    private int bounce = 5;
+    [SerializeField] private float duration = 15f;
+    [SerializeField] private int bounce = 5;
     #endregion
 
     protected override void Update()

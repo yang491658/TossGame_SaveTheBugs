@@ -3,12 +3,14 @@
 public class Bomb : Item
 {
     #region 스케일
-    private float scale = 3.5f;
-    private float spin = 30f;
+    [Header("Scale")]
+    [SerializeField] private float scale = 3.5f;
+    [SerializeField] private float spin = 30f;
     #endregion
 
     #region 능력
-    private float duration = 10f;
+    [Header("Ability")]
+    [SerializeField] private float duration = 10f;
     #endregion
 
     protected override void Update()

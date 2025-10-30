@@ -26,10 +26,8 @@ public class Enemy : Entity
     {
         base.Start();
 
-        Entity target = EntityManager.Instance?.GetClone();
-
-        if (target == null)
-            target = EntityManager.Instance?.GetPlayer();
+        Entity target = EntityManager.Instance?.GetClone() as Entity
+                        ?? EntityManager.Instance?.GetPlayer();
 
         Vector3 dir = (target.transform.position - transform.position).normalized;
         Move(dir * speed);

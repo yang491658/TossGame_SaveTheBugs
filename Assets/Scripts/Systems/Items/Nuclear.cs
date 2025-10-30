@@ -3,15 +3,17 @@ using UnityEngine;
 public class Nuclear : Item
 {
     #region 스케일
-    private float scale = 1f;
-    private float spin = 120f;
+    [Header("Scale")]
+    [SerializeField] private float scale = 1f;
+    [SerializeField] private float spin = 120f;
     #endregion
 
     #region 능력
+    [Header("Ability")]
     private bool isOrigin = true;
-    private int count = 3;
-    private float gap = 1.5f;
-    private float speed = 15f;
+    [SerializeField] private int count = 3;
+    [SerializeField] private float gap = 1.5f;
+    [SerializeField] private float speed = 15f;
     #endregion
 
     protected override void Update()
