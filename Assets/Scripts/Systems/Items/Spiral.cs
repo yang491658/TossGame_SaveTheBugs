@@ -5,7 +5,7 @@ public class Spiral : Item
 {
     #region 스케일
     [Header("Scale")]
-    [SerializeField] private float scale = 0.8f;
+    [SerializeField] private float scale = 1f;
     #endregion
 
     #region 능력

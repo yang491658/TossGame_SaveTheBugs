@@ -155,9 +155,9 @@ TextureImporter:
       name: 04.Missile_0
       rect:
         serializedVersion: 2
-        x: 19
+        x: 18
         y: 0
-        width: 474
+        width: 476
         height: 512
       alignment: 0
       pivot: {x: 0, y: 0}
