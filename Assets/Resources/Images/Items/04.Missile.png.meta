@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 40051a2831e39e14cb0b410caf6a6040
+guid: 24f405e6836666549929730557e40a84
 TextureImporter:
   internalIDToNameTable:
   - first:
@@ -51,7 +51,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 824
+  spritePixelsToUnits: 512
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -155,10 +155,10 @@ TextureImporter:
       name: 04.Missile_0
       rect:
         serializedVersion: 2
-        x: 99
-        y: 99
-        width: 826
-        height: 826
+        x: 19
+        y: 0
+        width: 474
+        height: 512
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}

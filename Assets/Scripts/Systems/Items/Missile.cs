@@ -4,7 +4,7 @@ public class Missile : Item
 {
     #region 스케일
     [Header("Scale")]
-    [SerializeField] private float scale = 3f;
+    [SerializeField] private float scale = 3.2f;
     #endregion
 
     #region 능력

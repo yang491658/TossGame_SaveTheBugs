@@ -4,7 +4,7 @@ public class Nuclear : Item
 {
     #region Ω∫ƒ…¿œ
     [Header("Scale")]
-    [SerializeField] private float scale = 1f;
+    [SerializeField] private float scale = 1.2f;
     [SerializeField] private float spin = -120f;
     #endregion
 

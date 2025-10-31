@@ -5,7 +5,7 @@ public class Shield : Item
 {
     #region 스케일
     [Header("Scale")]
-    [SerializeField] private float scale = 1f;
+    [SerializeField] private float scale = 1.2f;
     [SerializeField] private float spin = -120f;
     #endregion
 
@@ -15,6 +15,7 @@ public class Shield : Item
 
     private bool isOrigin = true;
     [SerializeField] private int count = 3;
+    [SerializeField] private float gap = 2f;
     private Vector3 offset;
 
     private bool isFired = false;
@@ -55,8 +56,8 @@ public class Shield : Item
 
     private void CopySelf()
     {
-        float diag = 2f;
-        float ortho = 1.2f;
+        float diag = gap;
+        float ortho = gap * 0.6f;
 
         Vector3[] offs = new Vector3[]
         {

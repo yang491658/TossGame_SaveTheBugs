@@ -5,7 +5,7 @@ public class Homing : Item
 {
     #region 스케일
     [Header("Scale")]
-    [SerializeField] private float scale = 2.5f;
+    [SerializeField] private float scale = 2.8f;
     [SerializeField] private float spin = -360f;
     #endregion
 

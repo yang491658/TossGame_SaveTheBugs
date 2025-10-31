@@ -4,7 +4,7 @@ public class Barrier : Item
 {
     #region 스케일
     [Header("Scale")]
-    [SerializeField] private float scale = 2f;
+    [SerializeField] private float scale = 2.5f;
     [SerializeField] private float spin = -120f;
     #endregion
 
