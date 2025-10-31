@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ID: 3
   Name: Barrier
-  Image: {fileID: 21300000, guid: 877d5b7738633de4aaebc942551ff551, type: 3}
+  Image: {fileID: 21300000, guid: 82c07178176b53a41b5d1652d452e32e, type: 3}
   Script: {fileID: 11500000, guid: f91422d2f33fffd41b384ca9a05caa72, type: 3}
   Sort: 4
