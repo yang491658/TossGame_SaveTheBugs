@@ -180,6 +180,11 @@ public class TestManager : MonoBehaviour
 
         GameManager.Instance?.SetSpeed(_on ? GameManager.Instance.GetMaxSpeed() : 1f);
         SoundManager.Instance?.ToggleSFX();
+
+        if (_on)
+        {
+            GameManager.Instance.Replay();
+        }
     }
 
     private IEnumerator AutoReplay()
