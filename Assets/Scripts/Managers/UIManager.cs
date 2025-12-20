@@ -724,6 +724,8 @@ public class UIManager : MonoBehaviour
     public bool GetOnStat() => statUI.activeSelf;
     public bool GetOnConfirm() => confirmUI.activeSelf;
     public bool GetOnResult() => resultUI.activeSelf;
+
+    public float GetPlayTime() => playTime;
     #endregion
 #endif
 }
