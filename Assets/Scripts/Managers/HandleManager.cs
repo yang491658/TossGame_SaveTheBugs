@@ -39,7 +39,7 @@ public class HandleManager : MonoBehaviour
     [SerializeField] private Transform handle;
     [SerializeField][Min(0f)] private float aimRatio = 0.35f;
 
-#if UNITY_EDITOR
+#if UNITY_EDITOR || UNITY_STANDALONE_WIN
     [Header("Mark")]
     private float markDuration = 1f;
     private float markRadius = 0.5f;
@@ -79,7 +79,7 @@ public class HandleManager : MonoBehaviour
     {
         if (GameManager.Instance.IsPaused) return;
 
-#if UNITY_EDITOR
+#if UNITY_EDITOR || UNITY_STANDALONE_WIN
         HandleMouse();
         DrawDebug();
 #else
@@ -87,7 +87,7 @@ public class HandleManager : MonoBehaviour
 #endif
     }
 
-#if UNITY_EDITOR
+#if UNITY_EDITOR || UNITY_STANDALONE_WIN
     private void HandleMouse()
     {
         if (Input.GetMouseButtonDown(0)) HandleBegin(Input.mousePosition);
@@ -313,7 +313,7 @@ public class HandleManager : MonoBehaviour
         }
     }
 
-#if UNITY_EDITOR
+#if UNITY_EDITOR || UNITY_STANDALONE_WIN
     private void OnRightClick(Vector3 _pos)
     {
         AddClick(_pos, Color.yellow);
