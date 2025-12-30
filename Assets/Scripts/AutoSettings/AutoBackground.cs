@@ -17,7 +17,8 @@ public class AutoBackground : MonoBehaviour
     private void OnValidate()
     {
         cam = Camera.main;
-        sr = GetComponent<SpriteRenderer>();
+        sr = GetComponentInChildren<SpriteRenderer>();
+        img = sr.transform;
         if (enabled) Fit();
     }
 #endif
