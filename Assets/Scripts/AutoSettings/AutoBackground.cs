@@ -46,6 +46,8 @@ public class AutoBackground : MonoBehaviour
 
     private void OnEnable()
     {
+        cam = Camera.main;
+        sr = GetComponentInChildren<SpriteRenderer>();
         Fit();
     }
 
