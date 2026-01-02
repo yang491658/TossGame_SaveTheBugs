@@ -102,7 +102,7 @@ public class TestManager : MonoBehaviour
     {
         SoundManager.Instance?.ToggleBGM();
 
-        AutoPlay();
+        SetAuto();
         UpdateTestUI();
     }
 
@@ -167,7 +167,7 @@ public class TestManager : MonoBehaviour
         #region 테스트 매니저
         if (Input.GetKeyDown(KeyCode.BackQuote)) OnClickTest();
         if (Input.GetKeyDown(KeyCode.L)) GameManager.Instance?.LevelUp();
-        if (Input.GetKeyDown(KeyCode.O)) AutoPlay(!IsAuto);
+        if (Input.GetKeyDown(KeyCode.O)) SetAuto(!IsAuto);
         if (IsAuto)
         {
             if (GameManager.Instance.IsGameOver)
@@ -175,11 +175,7 @@ public class TestManager : MonoBehaviour
                 if (autoRoutine == null)
                     autoRoutine = StartCoroutine(AutoReplay());
             }
-            else
-            {
-                MoveItem();
-                if (!GameManager.Instance.IsPaused) RandomStatUp();
-            }
+            else AutoPlay();
         }
         if (Input.GetKeyDown(KeyCode.UpArrow))
             ChangeGameSpeed(gameSpeed.value == gameSpeed.maxValue ? GameManager.Instance.GetMaxSpeed() : gameSpeed.maxValue);
@@ -188,13 +184,19 @@ public class TestManager : MonoBehaviour
         #endregion
     }
 
-    #region 테스트
-    public void AutoPlay(bool _on = true)
+    #region 자동 테스트
+    public void SetAuto(bool _on = true)
     {
         IsAuto = _on;
 
         GameManager.Instance?.SetSpeed(_on ? GameManager.Instance.GetMaxSpeed() : 1f);
         SoundManager.Instance?.ToggleSFX();
+    }
+
+    private void AutoPlay()
+    {
+        MoveItem();
+        if (!GameManager.Instance.IsPaused) RandomStatUp();
     }
 
     private IEnumerator AutoReplay()
