@@ -354,8 +354,7 @@ public class UIManager : MonoBehaviour
                     float scale = 1f + Mathf.Sin(t * Mathf.PI) * (maxScale - 1f);
                     countText.rectTransform.localScale = Vector3.one * scale;
 
-                    if (elapsed >= duration)
-                        break;
+                    if (elapsed >= duration) break;
 
                     yield return null;
                 }
@@ -622,8 +621,7 @@ public class UIManager : MonoBehaviour
                     sfxSlider.value = _volume;
                 break;
 
-            default:
-                return;
+            default: return;
         }
         UpdateSoundIcon();
     }
